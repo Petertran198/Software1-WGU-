@@ -7,4 +7,11 @@ public class InHouse extends Part{
         super(id, name, price, stock, min, max);
     }
 
+    public int getMachineId() {
+        return machineId;
+    }
+
+    public void setMachineId(int machineId) {
+        this.machineId = machineId;
+    }
 }
