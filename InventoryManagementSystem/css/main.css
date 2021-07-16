@@ -1,0 +1,15 @@
+.form-border {
+  -fx-border-color: #0984e3;
+}
+
+.cancel-btn {
+    -fx-background-color: #d63031ed;
+}
+
+.modify-btn {
+    -fx-background-color: #55efc4;
+}
+
+.add-btn {
+    -fx-background-color: #0984e3;
+}
