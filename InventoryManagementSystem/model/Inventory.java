@@ -32,6 +32,16 @@ public class Inventory {
         allProducts.add(newProduct);
     }
 
+    /** Search for Product by Id and return a product if found else returns null */
+    public static Product lookUpProduct(int id) {
+        Product returnedProductSearch = null;
+        for (Product product : allProducts){
+            if(product.getId() == id){
+                returnedProductSearch = product;
+            }
+        }
+        return returnedProductSearch;
+    }
 
 
 

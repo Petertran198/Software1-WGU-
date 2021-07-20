@@ -13,3 +13,7 @@
 .add-btn {
     -fx-background-color: #0984e3;
 }
+
+.text-danger {
+    -fx-text-fill: #d63031;
+}
