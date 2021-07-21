@@ -7,7 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class AddProductFormController {
+public class AddProductFormController  {
 
     public void switchBackToMainFormScene(ActionEvent event) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("../view/MainForm.fxml"));
