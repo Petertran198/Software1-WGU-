@@ -10,6 +10,7 @@ public class Inventory {
     private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
     /** -----------------For Parts ---------------------------------------*/
+    private static int partID = 0;
     /** Returns a list of all the parts*/
     public static ObservableList<Part> getAllParts(){
         return allParts;
@@ -25,7 +26,16 @@ public class Inventory {
         return allParts.remove(selectedPart);
     }
 
+    //InCharge of incrementing PartID
+    public static int incrementPartID() {
+       return ++partID;
+    }
+
+
+
     /** -----------------For Product ---------------------------------------*/
+    private static int productID = 0;
+
     /** Returns a list of all the Products*/
     public static ObservableList<Product> getAllProducts(){
         return allProducts;
@@ -52,7 +62,9 @@ public class Inventory {
        return allProducts.remove(selectedProduct);
     }
 
-
-
+    //InCharge of incrementing ProductId
+    public static int incrementProductID() {
+        return ++productID;
+    }
 
 }

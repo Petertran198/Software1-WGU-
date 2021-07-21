@@ -13,7 +13,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -27,16 +26,16 @@ public class MainFormController implements Initializable {
     @FXML
     private TableView<Part> partsTable;
     @FXML
-    private TableColumn<Product, Integer> partIDColumn;
+    private TableColumn<Part, Integer> partIDColumn;
 
     @FXML
-    private TableColumn<Product, String> partNameColumn;
+    private TableColumn<Part, String> partNameColumn;
 
     @FXML
-    private TableColumn<Product, Integer> partInventoryColumn;
+    private TableColumn<Part, Integer> partInventoryColumn;
 
     @FXML
-    private TableColumn<Product, Double> partCostColumn;
+    private TableColumn<Part, Double> partCostColumn;
 
     @FXML
     private TextField partSearchTextField;

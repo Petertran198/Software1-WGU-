@@ -1,10 +1,17 @@
 package InventoryManagementSystem.model;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+
+
 /**
  *
  * @author Doan Tran
  */
 public abstract class Part {
+
+
     private int id;
     private String name;
     private double price;
@@ -104,5 +111,8 @@ public abstract class Part {
     public void setMax(int max) {
         this.max = max;
     }
+
+
+
 
 }
