@@ -33,7 +33,7 @@
                   <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                </padding>
             </Button>
-            <Button layoutX="329.0" layoutY="317.0" mnemonicParsing="false" styleClass="cancel-btn" stylesheets="@../css/main.css" text="Delete">
+            <Button fx:id="partDeleteBtn" layoutX="329.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleDeleteForPart" styleClass="cancel-btn" stylesheets="@../css/main.css" text="Delete">
                <padding>
                   <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                </padding>

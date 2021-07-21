@@ -13,9 +13,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
@@ -39,6 +42,8 @@ public class MainFormController implements Initializable {
     private TextField partSearchTextField;
     @FXML
     private Label partError;
+    @FXML
+    private Button partDeleteBtn;
     /** ------------- fxid for Product table ------------*/
     @FXML
     private TableView<Product> productsTable;
@@ -137,6 +142,18 @@ public class MainFormController implements Initializable {
         }
         return null;
     }
+    /**  Runs when event is activated gets the selected part and delete it if it gets confirmation */
+    @FXML
+    public void handleDeleteForPart(ActionEvent event) throws IOException {
+        Part part = partsTable.getSelectionModel().getSelectedItem();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Are you sure?");
+        alert.setContentText("Delete the part?");
+        Optional<ButtonType> alertBtn = alert.showAndWait();
+        if(alertBtn.get() == ButtonType.OK){
+            Inventory.deletePart(part);
+        }
+    }
 
     /** Methods related to products ------------------------------------- */
     public void switchToAddProductScene(ActionEvent event) throws Exception {
@@ -153,6 +170,7 @@ public class MainFormController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
 
     /**
      * This method is in charge of looking for the product
@@ -203,6 +221,7 @@ public class MainFormController implements Initializable {
         }
         return null;
     }
+
     /** Method that gets called when the connected fxml file loads */
     @Override
     public void initialize(URL location, ResourceBundle resources) {

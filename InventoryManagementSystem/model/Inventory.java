@@ -20,6 +20,10 @@ public class Inventory {
         allParts.add(newPart);
     }
 
+    /** Delete a part return T/F depending if deleted */
+    public static boolean deletePart(Part selectedPart){
+        return allParts.remove(selectedPart);
+    }
 
     /** -----------------For Product ---------------------------------------*/
     /** Returns a list of all the Products*/
@@ -41,6 +45,11 @@ public class Inventory {
             }
         }
         return returnedProductSearch;
+    }
+
+    /** Delete product return T/F depending if deleted */
+    public static boolean deleteProduct(Product selectedProduct){
+       return allProducts.remove(selectedProduct);
     }
 
 
