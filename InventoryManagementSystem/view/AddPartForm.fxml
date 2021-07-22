@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="457.0" prefWidth="728.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InventoryManagementSystem.controller.AddPartFormController">
+<AnchorPane prefHeight="457.0" prefWidth="1022.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InventoryManagementSystem.controller.AddPartFormController">
    <children>
       <Label layoutX="27.0" layoutY="21.0" text="Add a Part">
          <font>
@@ -26,39 +26,39 @@
             <Font name="Arial" size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="122.0" layoutY="134.0" prefHeight="25.0" prefWidth="363.0" stylesheets="@../css/main.css" />
+      <TextField fx:id="nameField" layoutX="122.0" layoutY="134.0" prefHeight="25.0" prefWidth="363.0" stylesheets="@../css/main.css" />
       <Label layoutX="26.0" layoutY="175.0" text="Inventory">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="123.0" layoutY="173.0" prefHeight="25.0" prefWidth="363.0" stylesheets="@../css/main.css" />
+      <TextField fx:id="inventoryField" layoutX="123.0" layoutY="173.0" prefHeight="25.0" prefWidth="363.0" stylesheets="@../css/main.css" />
       <Label layoutX="27.0" layoutY="222.0" text="Price/Cost">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="120.0" layoutY="215.0" prefHeight="25.0" prefWidth="369.0" stylesheets="@../css/main.css" />
+      <TextField fx:id="costField" layoutX="120.0" layoutY="215.0" prefHeight="25.0" prefWidth="369.0" stylesheets="@../css/main.css" />
       <Label layoutX="27.0" layoutY="269.0" text="Max">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="70.0" layoutY="262.0" prefHeight="25.0" prefWidth="327.0" stylesheets="@../css/main.css" />
+      <TextField fx:id="maxField" layoutX="70.0" layoutY="262.0" prefHeight="25.0" prefWidth="327.0" stylesheets="@../css/main.css" />
       <Label fx:id="inHouseOrOutsourcedPartLabel" layoutX="27.0" layoutY="315.0" text="Machine ID">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="175.0" layoutY="311.0" prefHeight="25.0" prefWidth="475.0" stylesheets="@../css/main.css" />
+      <TextField fx:id="typeOfPartField" layoutX="175.0" layoutY="311.0" prefHeight="25.0" prefWidth="475.0" stylesheets="@../css/main.css" />
       <Label layoutX="431.0" layoutY="267.0" text="Min">
          <font>
             <Font name="Arial" size="18.0" />
          </font>
       </Label>
-      <TextField layoutX="477.0" layoutY="261.0" prefHeight="25.0" prefWidth="235.0" stylesheets="@../css/main.css" />
+      <TextField fx:id="minField" layoutX="477.0" layoutY="261.0" prefHeight="25.0" prefWidth="235.0" stylesheets="@../css/main.css" />
       <Button layoutX="611.0" layoutY="400.0" mnemonicParsing="false" onAction="#switchBackToMainFormScene" prefHeight="31.0" prefWidth="75.0" styleClass="cancel-btn" stylesheets="@../css/main.css" text="Cancel" textFill="#dfe6e9" />
-      <Button layoutX="490.0" layoutY="400.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="83.0" text="Save" />
+      <Button layoutX="490.0" layoutY="400.0" mnemonicParsing="false" onAction="#savePart" prefHeight="31.0" prefWidth="83.0" text="Save" />
       <RadioButton fx:id="inHousePartRadioBtn" layoutX="559.0" layoutY="83.0" mnemonicParsing="false" onAction="#handlePartInhouse" prefHeight="37.0" prefWidth="137.0" selected="true" text="Inhouse Part">
          <font>
             <Font name="Arial" size="14.0" />
@@ -72,5 +72,9 @@
             <Font size="14.0" />
          </font>
       </RadioButton>
+      <Label fx:id="errorList" layoutX="737.0" layoutY="8.0" prefHeight="202.0" prefWidth="278.0" styleClass="text-danger" stylesheets="@../css/main.css">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font></Label>
    </children>
 </AnchorPane>
