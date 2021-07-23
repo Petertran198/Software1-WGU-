@@ -1,6 +1,8 @@
 package InventoryManagementSystem.controller;
 
+import InventoryManagementSystem.model.InHouse;
 import InventoryManagementSystem.model.Inventory;
+import InventoryManagementSystem.model.Outsourced;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,9 +11,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -35,9 +40,18 @@ public class AddPartFormController implements Initializable {
     private TextField minField;
     @FXML
     private TextField typeOfPartField;
-
+    @FXML
+    private ToggleGroup typeOfPartToggleGroup;
+    @FXML
+    private RadioButton inHousePartRadioBtn;
+    @FXML
+    private RadioButton outSourcedPartRadioBtn;
     @FXML
     private Label errorList;
+
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
     private String errorListString = new String();
 
     public void switchBackToMainFormScene(ActionEvent event) throws Exception {
@@ -84,6 +98,22 @@ public class AddPartFormController implements Initializable {
         }
         return errors;
     }
+    //Check if what is entered can be turn into int
+    public static Optional<Integer> tryParseInt(String toParse) {
+        try {
+            return Optional.of(Integer.parseInt(toParse));
+        } catch (NumberFormatException e) {
+            return Optional.empty();
+        }
+    }
+    //Check if what is entered can be turn into Double
+    public static Optional<Double> tryParseDouble(String toParse) {
+        try {
+            return Optional.of(Double.parseDouble(toParse));
+        } catch (NumberFormatException e) {
+            return Optional.empty();
+        }
+    }
     public static String handleFormValidatingDataField(String name, String inventory, String cost, String max, String min) {
         String errors= "";
         if(!name.isBlank() && !tryParseInt(name).isEmpty()){
@@ -92,10 +122,10 @@ public class AddPartFormController implements Initializable {
         if(!inventory.isBlank() && tryParseInt(inventory).isEmpty()){
             errors += "\n- Inventory must be a number";
         }
-        if(!cost.isBlank() && tryParseInt(cost).isEmpty()){
+        if(!cost.isBlank() && tryParseDouble(cost).isEmpty()){
             errors += "\n- Cost must be a number";
         }
-        if(!max.isBlank() && tryParseInt(max).isEmpty()){
+        if(!max.isBlank() && tryParseDouble(max).isEmpty() ){
             errors += "\n- Max/Min value must be a number";
         }
         if(!min.isBlank() && tryParseInt(min).isEmpty()){
@@ -110,17 +140,10 @@ public class AddPartFormController implements Initializable {
         }
         return errors;
     }
-    //Check if what is entered can be turn into int
-    public static Optional<Integer> tryParseInt(String toParse) {
-        try {
-            return Optional.of(Integer.parseInt(toParse));
-        } catch (NumberFormatException e) {
-            return Optional.empty();
-        }
-    }
 
     @FXML
-    void savePart(ActionEvent event){
+    void savePart(ActionEvent event) throws Exception {
+        String id = idField.getText();
         String name = nameField.getText();
         String inventory = inventoryField.getText();
         String cost = costField.getText();
@@ -133,7 +156,31 @@ public class AddPartFormController implements Initializable {
         errorListString += handleFormValidatingDataField(name,inventory,cost,max,min);
         //Take the returned error messages and include it in the errorList
         errorList.setText(errorListString);
-
+        //If no errors then proceed to saving the part
+        if(errorListString.isBlank()){
+           if(typeOfPartToggleGroup.getSelectedToggle() == inHousePartRadioBtn){
+               //Convert the form fields to the correct data type for Inhouse parts
+               id = id.replaceAll("\\D+","");
+               int parseId = Integer.parseInt(id);
+               double parseCost = Double.parseDouble(cost);
+               int parseInventory = Integer.parseInt(inventory);
+               int parseMax = Integer.parseInt(max);
+               int parseMin = Integer.parseInt(min);
+               InHouse inHousePart = new InHouse(parseId, name,parseCost, parseInventory,parseMax,parseMin);
+               Inventory.addPart(inHousePart);
+           }else if(typeOfPartToggleGroup.getSelectedToggle() == outSourcedPartRadioBtn){
+               //Convert the form fields to the correct data type for Outsourced Part
+               id = id.replaceAll("\\D+","");
+               int parseId = Integer.parseInt(id);
+               double parseCost = Double.parseDouble(cost);
+               int parseInventory = Integer.parseInt(inventory);
+               int parseMax = Integer.parseInt(max);
+               int parseMin = Integer.parseInt(min);
+               Outsourced outsourcedPart = new Outsourced(parseId, name,parseCost, parseInventory,parseMax,parseMin);
+               Inventory.addPart(outsourcedPart);
+           }
+        }
+        switchBackToMainFormScene(event);
     }
 
 
