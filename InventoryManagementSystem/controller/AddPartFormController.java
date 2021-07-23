@@ -84,7 +84,32 @@ public class AddPartFormController implements Initializable {
         }
         return errors;
     }
-
+    public static String handleFormValidatingDataField(String name, String inventory, String cost, String max, String min) {
+        String errors= "";
+        if(!name.isBlank() && !tryParseInt(name).isEmpty()){
+            errors += "\n- Name can't contain numbers";
+        }
+        if(!inventory.isBlank() && tryParseInt(inventory).isEmpty()){
+            errors += "\n- Inventory must be a number";
+        }
+        if(!cost.isBlank() && tryParseInt(cost).isEmpty()){
+            errors += "\n- Cost must be a number";
+        }
+        if(!max.isBlank() && tryParseInt(max).isEmpty()){
+            errors += "\n- Max/Min value must be a number";
+        }
+        if(!min.isBlank() && tryParseInt(min).isEmpty()){
+            errors += "\n- Min value must be a number";
+        }
+        try{
+            if(!max.isBlank() && Integer.parseInt(max) < Integer.parseInt(min)){
+                errors += "\n- Max can not be smaller then min";
+            }
+        }catch(Exception e){
+            errors += "\n- Please fix Max/Min field";
+        }
+        return errors;
+    }
     //Check if what is entered can be turn into int
     public static Optional<Integer> tryParseInt(String toParse) {
         try {
@@ -105,30 +130,8 @@ public class AddPartFormController implements Initializable {
         int machineId;
         String companyName;
         errorListString =  handleFormErrorsEmptyField(name, inventory , cost, max, min, inHouseOrOutField);
+        errorListString += handleFormValidatingDataField(name,inventory,cost,max,min);
         //Take the returned error messages and include it in the errorList
-        if(!name.isBlank() && !tryParseInt(name).isEmpty()){
-            errorListString += "\n- Name can't contain numbers";
-        }
-
-        if(!inventory.isBlank() && tryParseInt(inventory).isEmpty()){
-            errorListString += "\n- Inventory must be a number";
-        }
-        if(!cost.isBlank() && tryParseInt(cost).isEmpty()){
-            errorListString += "\n- Cost must be a number";
-        }
-        if(!max.isBlank() && tryParseInt(max).isEmpty()){
-            errorListString += "\n- Max/Min value must be a number";
-        }
-        if(!min.isBlank() && tryParseInt(min).isEmpty()){
-            errorListString += "\n- Min value must be a number";
-        }
-        try{
-            if(!max.isBlank() && Integer.parseInt(max) < Integer.parseInt(min)){
-                errorListString += "\n- Max can not be smaller then min";
-            }
-        }catch(Exception e){
-            errorListString += "\n- Please fix Max/Min field";
-        }
         errorList.setText(errorListString);
 
     }
