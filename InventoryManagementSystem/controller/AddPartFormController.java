@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
@@ -83,6 +84,16 @@ public class AddPartFormController implements Initializable {
         }
         return errors;
     }
+
+    //Check if what is entered can be turn into int
+    public static Optional<Integer> tryParseInt(String toParse) {
+        try {
+            return Optional.of(Integer.parseInt(toParse));
+        } catch (NumberFormatException e) {
+            return Optional.empty();
+        }
+    }
+
     @FXML
     void savePart(ActionEvent event){
         String name = nameField.getText();
@@ -95,6 +106,29 @@ public class AddPartFormController implements Initializable {
         String companyName;
         errorListString =  handleFormErrorsEmptyField(name, inventory , cost, max, min, inHouseOrOutField);
         //Take the returned error messages and include it in the errorList
+        if(!name.isBlank() && !tryParseInt(name).isEmpty()){
+            errorListString += "\n- Name can't contain numbers";
+        }
+
+        if(!inventory.isBlank() && tryParseInt(inventory).isEmpty()){
+            errorListString += "\n- Inventory must be a number";
+        }
+        if(!cost.isBlank() && tryParseInt(cost).isEmpty()){
+            errorListString += "\n- Cost must be a number";
+        }
+        if(!max.isBlank() && tryParseInt(max).isEmpty()){
+            errorListString += "\n- Max/Min value must be a number";
+        }
+        if(!min.isBlank() && tryParseInt(min).isEmpty()){
+            errorListString += "\n- Min value must be a number";
+        }
+        try{
+            if(!max.isBlank() && Integer.parseInt(max) < Integer.parseInt(min)){
+                errorListString += "\n- Max can not be smaller then min";
+            }
+        }catch(Exception e){
+            errorListString += "\n- Please fix Max/Min field";
+        }
         errorList.setText(errorListString);
 
     }

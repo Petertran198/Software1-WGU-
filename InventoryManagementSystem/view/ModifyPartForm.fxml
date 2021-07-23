@@ -20,7 +20,7 @@
             <Font name="Arial" size="18.0" />
          </font>
       </Label>
-      <TextField disable="true" layoutX="62.0" layoutY="89.0" prefHeight="25.0" prefWidth="412.0" stylesheets="@../css/main.css" text="Auto Gen - Disabled" />
+      <TextField disable="true" layoutX="62.0" layoutY="89.0" prefHeight="25.0" prefWidth="421.0" stylesheets="@../css/main.css" text="Auto Gen - Disabled" />
       <Label layoutX="27.0" layoutY="136.0" text="Name">
          <font>
             <Font name="Arial" size="18.0" />
@@ -56,7 +56,7 @@
             <Font name="Arial" size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="typeOfPartField" layoutX="175.0" layoutY="311.0" prefHeight="25.0" prefWidth="475.0" stylesheets="@../css/main.css" />
+      <TextField fx:id="typeOfPartField" layoutX="175.0" layoutY="311.0" prefHeight="25.0" prefWidth="535.0" stylesheets="@../css/main.css" />
       <Button layoutX="611.0" layoutY="400.0" mnemonicParsing="false" onAction="#switchBackToMainFormScene" prefHeight="31.0" prefWidth="75.0" styleClass="cancel-btn" stylesheets="@../css/main.css" text="Cancel" textFill="#dfe6e9" />
       <Button layoutX="490.0" layoutY="400.0" mnemonicParsing="false" onAction="#savePart" prefHeight="31.0" prefWidth="83.0" text="Save" />
       <RadioButton fx:id="inHousePartRadioBtn" layoutX="569.0" layoutY="93.0" mnemonicParsing="false" onAction="#handlePartInhouse" prefHeight="37.0" prefWidth="137.0" selected="true" text="Inhouse Part">

@@ -43,7 +43,7 @@
                   <Font name="Arial Black" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="partSearchTextField" layoutX="255.0" layoutY="16.0" onAction="#partSearchResultHandler" prefHeight="25.0" prefWidth="164.0" promptText="Search by Part ID or Name.." />
+            <TextField fx:id="partSearchTextField" layoutX="255.0" layoutY="16.0" onAction="#partSearchResultHandler" prefHeight="25.0" prefWidth="164.0" promptText="Search by Part ID or Name" />
             <TableView fx:id="partsTable" layoutX="9.0" layoutY="53.0" prefHeight="244.0" prefWidth="410.0">
               <columns>
                 <TableColumn fx:id="partIDColumn" prefWidth="75.0" text="Part ID" />
@@ -65,7 +65,10 @@
                   <Font name="Arial Black" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="productSearchTextField" layoutX="253.0" layoutY="17.0" onAction="#productSearchResultHandler" prefHeight="25.0" prefWidth="164.0" promptText="Search by Product ID or Name.." />
+            <TextField fx:id="productSearchTextField" layoutX="253.0" layoutY="17.0" onAction="#productSearchResultHandler" prefHeight="25.0" prefWidth="164.0" promptText="Search by Product ID or Name">
+               <font>
+                  <Font size="11.0" />
+               </font></TextField>
             <TableView fx:id="productsTable" layoutX="10.0" layoutY="53.0" prefHeight="244.0" prefWidth="410.0">
                <columns>
                   <TableColumn fx:id="productIDColumn" prefWidth="75.0" text="Product ID" />
