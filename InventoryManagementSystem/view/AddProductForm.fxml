@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="581.0" prefWidth="954.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InventoryManagementSystem.controller.AddProductFormController">
+<AnchorPane prefHeight="518.0" prefWidth="1111.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InventoryManagementSystem.controller.AddProductFormController">
    <children>
       <Label layoutX="17.0" layoutY="96.0" text="ID">
          <font>

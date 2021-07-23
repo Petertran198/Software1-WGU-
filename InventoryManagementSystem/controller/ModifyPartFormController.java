@@ -52,7 +52,8 @@ public class ModifyPartFormController {
     void handlePartOutsourced(ActionEvent event) {
         inHouseOrOutsourcedPartLabel.setText("Company's Name");
     }
-    public static String handleFormErrorsEmptyField(String name, String inventory, String cost, String max, String min) {
+
+    public static String handleFormErrorsEmptyField(String name, String inventory, String cost, String max, String min, String inHouseFieldOrOutsourcedField) {
         String errors= "";
 
         if (name.equals("")) {
@@ -70,9 +71,9 @@ public class ModifyPartFormController {
         if (min.equals("")) {
             errors = errors + "\n- Min field can't be empty. ";
         }
-//        if (inHouseOrOutsourcedField.equals("")) {
-//            errors = errors + "\nMachineID or Company Name field can't be empty. ";
-//        }
+        if (inHouseFieldOrOutsourcedField.equals("")) {
+            errors = errors + "\n- MachineID/Company Name field can't be empty. ";
+        }
         return errors;
     }
     @FXML
@@ -82,9 +83,10 @@ public class ModifyPartFormController {
         String cost = costField.getText();
         String max = maxField.getText();
         String min = minField.getText();
+        String inHouseOrOutField = typeOfPartField.getText();
         int machineId;
         String companyName;
-        errorListString =  handleFormErrorsEmptyField(name, inventory , cost, max, min);
+        errorListString =  handleFormErrorsEmptyField(name, inventory , cost, max, min,inHouseOrOutField);
         //Take the returned error messages and include it in the errorList
         errorList.setText(errorListString);
 

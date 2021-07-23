@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="457.0" prefWidth="1022.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InventoryManagementSystem.controller.AddPartFormController">
+<AnchorPane prefHeight="518.0" prefWidth="1111.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="InventoryManagementSystem.controller.AddPartFormController">
    <children>
       <Label layoutX="27.0" layoutY="21.0" text="Add a Part">
          <font>
@@ -72,7 +72,7 @@
             <Font size="14.0" />
          </font>
       </RadioButton>
-      <Label fx:id="errorList" layoutX="737.0" layoutY="8.0" prefHeight="202.0" prefWidth="278.0" styleClass="text-danger" stylesheets="@../css/main.css">
+      <Label fx:id="errorList" layoutX="737.0" layoutY="8.0" prefHeight="202.0" prefWidth="333.0" styleClass="text-danger" stylesheets="@../css/main.css">
          <font>
             <Font name="Arial" size="14.0" />
          </font></Label>
