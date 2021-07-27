@@ -21,19 +21,19 @@
             <Font name="Arial Black" size="24.0" />
          </font>
       </Label>
-      <Pane layoutX="42.0" layoutY="53.0" prefHeight="376.0" prefWidth="437.0" styleClass="form-border" stylesheets="@../css/main.css">
+      <Pane layoutX="42.0" layoutY="53.0" prefHeight="449.0" prefWidth="437.0" styleClass="form-border" stylesheets="@../css/main.css">
          <children>
-            <Button layoutX="163.0" layoutY="317.0" mnemonicParsing="false" onAction="#switchToAddPartScene" styleClass="add-btn" stylesheets="@../css/main.css" text="Add">
+            <Button layoutX="166.0" layoutY="398.0" mnemonicParsing="false" onAction="#switchToAddPartScene" styleClass="add-btn" stylesheets="@../css/main.css" text="Add">
                <padding>
                   <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                </padding>
             </Button>
-            <Button layoutX="242.0" layoutY="317.0" mnemonicParsing="false" onAction="#switchToModifyPartScene" styleClass="modify-btn" stylesheets="@../css/main.css" text="Modify">
+            <Button layoutX="245.0" layoutY="398.0" mnemonicParsing="false" onAction="#modifyPart" styleClass="modify-btn" stylesheets="@../css/main.css" text="Modify">
                <padding>
                   <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                </padding>
             </Button>
-            <Button fx:id="partDeleteBtn" layoutX="329.0" layoutY="317.0" mnemonicParsing="false" onAction="#handleDeleteForPart" styleClass="cancel-btn" stylesheets="@../css/main.css" text="Delete">
+            <Button fx:id="partDeleteBtn" layoutX="332.0" layoutY="398.0" mnemonicParsing="false" onAction="#handleDeleteForPart" styleClass="cancel-btn" stylesheets="@../css/main.css" text="Delete">
                <padding>
                   <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                </padding>
@@ -44,7 +44,7 @@
                </font>
             </Label>
             <TextField fx:id="partSearchTextField" layoutX="255.0" layoutY="16.0" onAction="#partSearchResultHandler" prefHeight="25.0" prefWidth="164.0" promptText="Search by Part ID or Name" />
-            <TableView fx:id="partsTable" layoutX="9.0" layoutY="53.0" prefHeight="244.0" prefWidth="410.0">
+            <TableView fx:id="partsTable" layoutX="9.0" layoutY="87.0" prefHeight="244.0" prefWidth="410.0">
               <columns>
                 <TableColumn fx:id="partIDColumn" prefWidth="75.0" text="Part ID" />
                 <TableColumn fx:id="partNameColumn" prefWidth="75.0" text="Part Name" />
@@ -52,13 +52,13 @@
                   <TableColumn fx:id="partCostColumn" prefWidth="154.66665649414062" text="Price/Cost Per Unit" />
               </columns>
             </TableView>
-            <Label fx:id="partError" layoutX="117.0" layoutY="21.0" prefHeight="17.0" prefWidth="123.0" styleClass="text-danger" stylesheets="@../css/main.css" />
+            <Label fx:id="partError" layoutX="82.0" layoutY="16.0" prefHeight="66.0" prefWidth="173.0" styleClass="text-danger" stylesheets="@../css/main.css" />
          </children>
          <padding>
             <Insets top="10.0" />
          </padding>
       </Pane>
-      <Pane layoutX="507.0" layoutY="51.0" prefHeight="376.0" prefWidth="437.0" styleClass="form-border" stylesheets="@../css/main.css">
+      <Pane layoutX="507.0" layoutY="51.0" prefHeight="452.0" prefWidth="437.0" styleClass="form-border" stylesheets="@../css/main.css">
          <children>
             <Label graphicTextGap="5.0" layoutX="11.0" prefHeight="58.0" prefWidth="437.0" text="Products">
                <font>
@@ -69,7 +69,7 @@
                <font>
                   <Font size="11.0" />
                </font></TextField>
-            <TableView fx:id="productsTable" layoutX="10.0" layoutY="53.0" prefHeight="244.0" prefWidth="410.0">
+            <TableView fx:id="productsTable" layoutX="10.0" layoutY="92.0" prefHeight="244.0" prefWidth="410.0">
                <columns>
                   <TableColumn fx:id="productIDColumn" prefWidth="75.0" text="Product ID" />
                   <TableColumn fx:id="productNameColumn" prefWidth="104.66668701171875" text="Product Name" />
@@ -77,17 +77,17 @@
                   <TableColumn fx:id="productCostColumn" prefWidth="118.66668701171875" text="Price/Cost Per Unit" />
                </columns>
             </TableView>
-            <Button layoutX="169.0" layoutY="315.0" mnemonicParsing="false" onAction="#switchToAddProductScene" styleClass="add-btn" stylesheets="@../css/main.css" text="Add">
+            <Button layoutX="166.0" layoutY="395.0" mnemonicParsing="false" onAction="#switchToAddProductScene" styleClass="add-btn" stylesheets="@../css/main.css" text="Add">
                <padding>
                   <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                </padding>
             </Button>
-            <Button layoutX="248.0" layoutY="317.0" mnemonicParsing="false" onAction="#switchToModifyProductScene" styleClass="modify-btn" stylesheets="@../css/main.css" text="Modify">
+            <Button layoutX="245.0" layoutY="397.0" mnemonicParsing="false" onAction="#switchToModifyProductScene" styleClass="modify-btn" stylesheets="@../css/main.css" text="Modify">
                <padding>
                   <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                </padding>
             </Button>
-            <Button layoutX="335.0" layoutY="317.0" mnemonicParsing="false" styleClass="cancel-btn" stylesheets="@../css/main.css" text="Delete">
+            <Button layoutX="332.0" layoutY="397.0" mnemonicParsing="false" styleClass="cancel-btn" stylesheets="@../css/main.css" text="Delete">
                <padding>
                   <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                </padding>

@@ -30,8 +30,36 @@ public class Inventory {
     public static int incrementPartID() {
        return ++partID;
     }
+    /** Search for Part by Id and return a part if found else returns null */
+    public static Part lookUpPart(int id) {
+        Part returnedPartSearch = null;
+        for (Part part : allParts){
+            if(part.getId() == id){
+                returnedPartSearch = part;
+            }
+        }
+        return returnedPartSearch;
+    }
 
 
+    public static Part lookUpPart(String name) {
+        Part returnedPartSearch = null;
+        for (Part part : allParts){
+            if(part.getName() == name){
+                returnedPartSearch = part;
+            }
+        }
+        return returnedPartSearch;
+    }
+
+    public void updatePart(Part p) {
+        for (int i = 0; i < allParts.size(); i++) {
+            if (allParts.get(i).getId() == p.getId()) {
+                allParts.set(i, p);
+                break;
+            }
+        }
+    }
 
     /** -----------------For Product ---------------------------------------*/
     private static int productID = 0;

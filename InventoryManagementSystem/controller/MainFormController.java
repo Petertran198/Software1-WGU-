@@ -66,6 +66,9 @@ public class MainFormController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    public static Part selectedPartToModify;
+
+
 
     //How to exit application will show popup box
     public void exitApplication(ActionEvent event) throws Exception {
@@ -92,6 +95,25 @@ public class MainFormController implements Initializable {
         stage.show();
 
     }
+    public void modifyPart(ActionEvent event) throws Exception {
+        partError.setText("");
+        String err = "";
+        Part selected = partsTable.getSelectionModel().getSelectedItem();
+        if(selected == null){
+                err += "\n- No Part Selected";
+        }
+        if(Inventory.getAllParts().size() == 0){
+             err += "\n- Please Select a Part";
+        }
+        if(err.isEmpty()){
+            //Get the part
+            Part p = Inventory.lookUpPart(selected.getId());
+            selectedPartToModify = p;
+            switchToModifyPartScene(event);
+        }else {
+            partError.setText(err);
+        }
+    }
     /**
      * This method is in charge of looking for the product
      * @param event button clicked
@@ -110,7 +132,7 @@ public class MainFormController implements Initializable {
                 foundPartsResultList.add(foundPart);
             }
         } catch (Exception e ) {
-            System.err.println("Caught Exception can not find" + e.getMessage());
+            System.err.println("------------" + e.getMessage());
 
         }
         /** If product can not be found write error message */

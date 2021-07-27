@@ -114,7 +114,7 @@ public class AddPartFormController implements Initializable {
             return Optional.empty();
         }
     }
-    public static String handleFormValidatingDataField(String name, String inventory, String cost, String max, String min) {
+    public  String handleFormValidatingDataField(String name, String inventory, String cost, String max, String min, String typeOfPart) {
         String errors= "";
         if(!name.isBlank() && !tryParseInt(name).isEmpty()){
             errors += "\n- Name can't contain numbers";
@@ -130,6 +130,9 @@ public class AddPartFormController implements Initializable {
         }
         if(!min.isBlank() && tryParseInt(min).isEmpty()){
             errors += "\n- Min value must be a number";
+        }
+        if((typeOfPartToggleGroup.getSelectedToggle() == inHousePartRadioBtn) &&!typeOfPart.isBlank() && tryParseInt(typeOfPart).isEmpty()){
+            errors += "\n- Machine Id must only be numbers";
         }
         try{
             if(!max.isBlank() && Integer.parseInt(max) < Integer.parseInt(min)){
@@ -153,34 +156,30 @@ public class AddPartFormController implements Initializable {
         int machineId;
         String companyName;
         errorListString =  handleFormErrorsEmptyField(name, inventory , cost, max, min, inHouseOrOutField);
-        errorListString += handleFormValidatingDataField(name,inventory,cost,max,min);
+        errorListString += handleFormValidatingDataField(name,inventory,cost,max,min, inHouseOrOutField);
         //Take the returned error messages and include it in the errorList
         errorList.setText(errorListString);
         //If no errors then proceed to saving the part
         if(errorListString.isBlank()){
+            // extracted attributes to make instance of Part
+            id = id.replaceAll("\\D+","");
+            int parseId = Integer.parseInt(id);
+            double parseCost = Double.parseDouble(cost);
+            int parseInventory = Integer.parseInt(inventory);
+            int parseMax = Integer.parseInt(max);
+            int parseMin = Integer.parseInt(min);
            if(typeOfPartToggleGroup.getSelectedToggle() == inHousePartRadioBtn){
-               //Convert the form fields to the correct data type for Inhouse parts
-               id = id.replaceAll("\\D+","");
-               int parseId = Integer.parseInt(id);
-               double parseCost = Double.parseDouble(cost);
-               int parseInventory = Integer.parseInt(inventory);
-               int parseMax = Integer.parseInt(max);
-               int parseMin = Integer.parseInt(min);
-               InHouse inHousePart = new InHouse(parseId, name,parseCost, parseInventory,parseMax,parseMin);
+               machineId= Integer.parseInt(inHouseOrOutField);
+               InHouse inHousePart = new InHouse(parseId, name,parseCost, parseInventory,parseMax,parseMin, machineId);
                Inventory.addPart(inHousePart);
            }else if(typeOfPartToggleGroup.getSelectedToggle() == outSourcedPartRadioBtn){
-               //Convert the form fields to the correct data type for Outsourced Part
-               id = id.replaceAll("\\D+","");
-               int parseId = Integer.parseInt(id);
-               double parseCost = Double.parseDouble(cost);
-               int parseInventory = Integer.parseInt(inventory);
-               int parseMax = Integer.parseInt(max);
-               int parseMin = Integer.parseInt(min);
-               Outsourced outsourcedPart = new Outsourced(parseId, name,parseCost, parseInventory,parseMax,parseMin);
+               companyName = inHouseOrOutField;
+
+               Outsourced outsourcedPart = new Outsourced(parseId, name,parseCost, parseInventory,parseMax,parseMin,companyName);
                Inventory.addPart(outsourcedPart);
            }
+           switchBackToMainFormScene(event);
         }
-        switchBackToMainFormScene(event);
     }
 
 
