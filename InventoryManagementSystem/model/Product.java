@@ -4,8 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Product {
-    /** List of parts that is associated with the Product */
-    private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
+
     private int id;
     private String name;
     private double price;
@@ -70,24 +69,19 @@ public class Product {
         this.max = max;
     }
 
-    /**
-     *
-     * @param part you want to add
-     */
+
+
+
+    /** List of parts that is associated with the Product */
+    private ObservableList<Part> associatedParts = FXCollections.observableArrayList();
     public void addAssociatedPart(Part part) {
         associatedParts.add(part);
     }
 
-    /**
-     * @param selectedAssociatedPart is the part you want to delete
-     * @return boolean if parts has been deleted or not
-     */
     public boolean deleteAssociatedPart(Part selectedAssociatedPart) {
         return true;
     }
-    /**
-        @return a list of Parts associated with the Product
-     */
+
     public ObservableList<Part> getAllAssociatedParts() {
         return associatedParts;
     }

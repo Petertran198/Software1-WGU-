@@ -52,7 +52,7 @@
             <Font name="Arial Black" size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="partsSearchField" layoutX="423.0" layoutY="27.0" prefHeight="25.0" prefWidth="221.0" promptText="Search by ID or Name" />
+      <TextField fx:id="partsSearchField" layoutX="423.0" layoutY="27.0" onAction="#partSearchResultHandler" prefHeight="25.0" prefWidth="221.0" promptText="Search by ID or Name" />
       <TableView fx:id="partsTable" layoutX="419.0" layoutY="76.0" prefHeight="172.0" prefWidth="459.0">
          <columns>
             <TableColumn fx:id="partIDColumn" prefWidth="75.0" text="ID" />
@@ -61,17 +61,17 @@
             <TableColumn fx:id="partCostColumn" prefWidth="181.55560302734375" text="Price/Cost Per Unit" />
          </columns>
       </TableView>
-      <Button layoutX="812.0" layoutY="255.0" mnemonicParsing="false" styleClass="add-btn" stylesheets="@../css/main.css" text="Add">
+      <Button layoutX="812.0" layoutY="255.0" mnemonicParsing="false" onAction="#handleSavePartToProduct" styleClass="add-btn" stylesheets="@../css/main.css" text="Add">
          <padding>
             <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
          </padding>
       </Button>
-      <TableView layoutX="418.0" layoutY="306.0" prefHeight="172.0" prefWidth="459.0">
+      <TableView fx:id="associatedParts" layoutX="418.0" layoutY="306.0" prefHeight="172.0" prefWidth="459.0">
          <columns>
-            <TableColumn prefWidth="75.0" text="ID" />
-            <TableColumn prefWidth="75.0" text="Name" />
-            <TableColumn prefWidth="126.44439697265625" text="Inventory Level" />
-            <TableColumn prefWidth="181.55560302734375" text="Price/Cost Per Unit" />
+            <TableColumn fx:id="linkedPartIDColumn" prefWidth="75.0" text="ID" />
+            <TableColumn fx:id="linkedPartNameColumn" prefWidth="75.0" text="Name" />
+            <TableColumn fx:id="linkedPartInventoryColumn" prefWidth="126.44439697265625" text="Inventory Level" />
+            <TableColumn fx:id="linkedPartCostColumn" prefWidth="181.55560302734375" text="Price/Cost Per Unit" />
          </columns>
       </TableView>
       <Button layoutX="704.0" layoutY="488.0" mnemonicParsing="false" styleClass="cancel-btn" stylesheets="@../css/main.css" text="Remove Associated Part ">
@@ -89,6 +89,6 @@
             <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
          </padding>
       </Button>
-      <Label fx:id="partSearchErrorField" layoutX="661.0" layoutY="4.0" prefHeight="67.0" prefWidth="208.0" />
+      <Label fx:id="partErrorField" layoutX="889.0" layoutY="7.0" prefHeight="242.0" prefWidth="208.0" styleClass="text-danger" stylesheets="@../css/main.css" />
    </children>
 </AnchorPane>

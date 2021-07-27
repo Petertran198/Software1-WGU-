@@ -2,6 +2,7 @@ package InventoryManagementSystem.controller;
 
 import InventoryManagementSystem.model.Inventory;
 import InventoryManagementSystem.model.Part;
+import InventoryManagementSystem.model.Product;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,11 +19,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AddProductFormController implements Initializable {
-    //Get the FXML ID
+    //Get the FXML ID for product textfield
     @FXML
     private TextField productIDField;
     @FXML
@@ -35,10 +37,11 @@ public class AddProductFormController implements Initializable {
     private TextField productMaxField;
     @FXML
     private TextField productMinField;
+    //Parts table FXID
     @FXML
     private TextField partsSearchField;
     @FXML
-    private Label partSearchErrorField;
+    private Label partErrorField;
     @FXML
     private TableView<Part> partsTable;
     @FXML
@@ -53,6 +56,22 @@ public class AddProductFormController implements Initializable {
     @FXML
     private TableColumn<Part, Double> partCostColumn;
 
+    private ObservableList<Part> linkedParts = FXCollections.observableArrayList();
+    // Linked parts Table FXID
+    @FXML
+    private TableView<Part> associatedParts;
+    @FXML
+    private TableColumn<Part, Integer> linkedPartIDColumn;
+
+    @FXML
+    private TableColumn<Part, String> linkedPartNameColumn;
+
+    @FXML
+    private TableColumn<Part, Integer> linkedPartInventoryColumn;
+
+    @FXML
+    private TableColumn<Part, Double> linkedPartCostColumn;
+
 
     public void switchBackToMainFormScene(ActionEvent event) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("../view/MainForm.fxml"));
@@ -62,13 +81,9 @@ public class AddProductFormController implements Initializable {
         stage.show();
     }
 
-
-    /**
-     * This method is in charge of looking for the product
-     * @param event button clicked
-     */
+// Handling Part Search
     public void partSearchResultHandler(ActionEvent event) {
-        partSearchErrorField.setText("");
+        partErrorField.setText("");
         /** Get the text from the search field */
         String searchedForPartText = partsSearchField.getText();
         /* Look to see if any part was found by Name and return a list of the part found */
@@ -86,7 +101,7 @@ public class AddProductFormController implements Initializable {
         }
         /** If product can not be found write error message */
         if(foundPartsResultList.size() ==0 ){
-            partSearchErrorField.setText("Unable to find part");
+            partErrorField.setText("Unable to find part");
         }
         partsTable.setItems(foundPartsResultList);
         partsSearchField.setText("");
@@ -112,15 +127,38 @@ public class AddProductFormController implements Initializable {
         }
         return null;
     }
+//--------------------------
+    @FXML
+     private void handleSavePartToProduct(ActionEvent event) throws IOException {
+        Part selectedPart = partsTable.getSelectionModel().getSelectedItem();
+        //If no part is selected
+        if (selectedPart != null ) {
+            partErrorField.setText("");
+            //Only add if the part selected is not already in the list
+            if(!linkedParts.contains(selectedPart)){
+                linkedParts.add(selectedPart);
+                associatedParts.setItems(linkedParts);
+            } else {
+                partErrorField.setText("Part already added");
+            }
+        } else {
+            partErrorField.setText("Must Select a Part");
+        }
 
+    }
 
-    @Override
+        @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        partsTable.setItems(Inventory.getAllParts());
+
         partIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         partInventoryColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partCostColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         partsTable.setItems(Inventory.getAllParts());
+
+        linkedPartIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        linkedPartNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        linkedPartInventoryColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        linkedPartCostColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
 }

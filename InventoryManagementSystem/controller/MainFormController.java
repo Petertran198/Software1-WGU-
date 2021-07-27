@@ -246,12 +246,12 @@ public class MainFormController implements Initializable {
     /** Method that gets called when the connected fxml file loads */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        InHouse i1 = new InHouse(1,"pointy screw", 1.00, 100, 1,100);
-//        InHouse i2 = new InHouse(2,"screw1" , 3.00, 100, 1,100);
-//        Outsourced i3 = new Outsourced(3,"screw tip", 4.00, 100, 1,100);
-//        Inventory.addPart(i1);
-//        Inventory.addPart(i2);
-//        Inventory.addPart(i3);
+        InHouse i1 = new InHouse(1,"pointy screw", 1.00, 100, 1,100, 5);
+        InHouse i2 = new InHouse(2,"screw1" , 3.00, 100, 1,100,6);
+        Outsourced i3 = new Outsourced(3,"screw tip", 4.00, 100, 1,100,"boo");
+        Inventory.addPart(i1);
+        Inventory.addPart(i2);
+        Inventory.addPart(i3);
         partsTable.setItems(Inventory.getAllParts());
         partIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
