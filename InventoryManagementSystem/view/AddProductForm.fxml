@@ -74,7 +74,7 @@
             <TableColumn fx:id="linkedPartCostColumn" prefWidth="181.55560302734375" text="Price/Cost Per Unit" />
          </columns>
       </TableView>
-      <Button layoutX="704.0" layoutY="488.0" mnemonicParsing="false" styleClass="cancel-btn" stylesheets="@../css/main.css" text="Remove Associated Part ">
+      <Button layoutX="704.0" layoutY="488.0" mnemonicParsing="false" onAction="#handleDeletePartFromProduct" styleClass="cancel-btn" stylesheets="@../css/main.css" text="Remove Associated Part ">
          <padding>
             <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
          </padding>
@@ -90,5 +90,6 @@
          </padding>
       </Button>
       <Label fx:id="partErrorField" layoutX="889.0" layoutY="7.0" prefHeight="242.0" prefWidth="208.0" styleClass="text-danger" stylesheets="@../css/main.css" />
+      <Label fx:id="associatedPartErrors" layoutX="889.0" layoutY="306.0" prefHeight="172.0" prefWidth="208.0" styleClass="text-danger" stylesheets="@../css/main.css" />
    </children>
 </AnchorPane>

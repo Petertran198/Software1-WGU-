@@ -71,7 +71,8 @@ public class AddProductFormController implements Initializable {
 
     @FXML
     private TableColumn<Part, Double> linkedPartCostColumn;
-
+    @FXML
+    private Label associatedPartErrors;
 
     public void switchBackToMainFormScene(ActionEvent event) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("../view/MainForm.fxml"));
@@ -147,6 +148,25 @@ public class AddProductFormController implements Initializable {
 
     }
 
+
+    @FXML
+    private void handleDeletePartFromProduct(ActionEvent event) throws IOException {
+        Part selectedPart = associatedParts.getSelectionModel().getSelectedItem();
+        String err = "";
+        if(selectedPart == null){
+            err += "\n- Please select a part first";
+        }
+
+        if(linkedParts.isEmpty() ){
+            err += "\n- Please associate at least one part";
+        }
+        associatedPartErrors.setText(err);
+        if(err.isBlank()){
+            linkedParts.remove(selectedPart);
+            associatedParts.setItems(linkedParts);
+        }
+
+    }
         @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
