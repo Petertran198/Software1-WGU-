@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -166,10 +167,11 @@ public class MainFormController implements Initializable {
     }
 
     private ObservableList<Part> searchByPartsName(String name){
+        name = name.toLowerCase();
         ObservableList<Part> foundParts = FXCollections.observableArrayList();
         ObservableList<Part> allParts = Inventory.getAllParts();
         for(Part p : allParts){
-            if(p.getName().contains(name)){
+            if(p.getName().toLowerCase().contains(name)){
                 foundParts.add(p);
             }
         }
@@ -245,10 +247,11 @@ public class MainFormController implements Initializable {
     }
 
     private ObservableList<Product> searchByProductsName(String name){
+        name = name.toLowerCase();
         ObservableList<Product> foundProducts = FXCollections.observableArrayList();
         ObservableList<Product> allProducts = Inventory.getAllProducts();
         for(Product p : allProducts){
-            if(p.getName().contains(name)){
+            if(p.getName().toLowerCase().contains(name)){
                 foundProducts.add(p);
             }
         }
@@ -281,12 +284,12 @@ public class MainFormController implements Initializable {
     /** Method that gets called when the connected fxml file loads */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        InHouse i1 = new InHouse(1,"pointy screw", 1.00, 100, 1,100, 5);
-        InHouse i2 = new InHouse(2,"screw1" , 3.00, 100, 1,100,6);
-        Outsourced i3 = new Outsourced(3,"screw tip", 4.00, 100, 1,100,"boo");
-        Inventory.addPart(i1);
-        Inventory.addPart(i2);
-        Inventory.addPart(i3);
+//        InHouse i1 = new InHouse(1,"pointy screw", 1.00, 100, 1,100, 5);
+//        InHouse i2 = new InHouse(2,"screw1" , 3.00, 100, 1,100,6);
+//        Outsourced i3 = new Outsourced(3,"screw tip", 4.00, 100, 1,100,"boo");
+//        Inventory.addPart(i1);
+//        Inventory.addPart(i2);
+//        Inventory.addPart(i3);
         partsTable.setItems(Inventory.getAllParts());
         partIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));

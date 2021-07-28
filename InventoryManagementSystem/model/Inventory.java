@@ -54,7 +54,7 @@ public class Inventory {
         return returnedPartSearch;
     }
 
-    public void updatePart(Part p) {
+    public static void updatePart(Part p) {
         for (int i = 0; i < allParts.size(); i++) {
             if (allParts.get(i).getId() == p.getId()) {
                 allParts.set(i, p);
@@ -85,6 +85,15 @@ public class Inventory {
             }
         }
         return returnedProductSearch;
+    }
+
+    public static void updateProduct(Product p) {
+        for (int i = 0; i < allProducts.size(); i++) {
+            if (allProducts.get(i).getId() == p.getId()) {
+                allProducts.set(i, p);
+                break;
+            }
+        }
     }
 
     /** Delete product return T/F depending if deleted */

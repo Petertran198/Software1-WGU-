@@ -10,10 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -62,6 +59,17 @@ public class AddPartFormController implements Initializable {
         stage.show();
     }
 
+    @FXML
+    private void handleCancel(ActionEvent event) throws Exception {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Are you sure?");
+        alert.setContentText("Cancel adding product");
+        Optional<ButtonType> alertBtn = alert.showAndWait();
+        if(alertBtn.get() == ButtonType.OK){
+            switchBackToMainFormScene(event);
+        }
+
+    }
 
     //methods when clicked on radio btn  to handle Outsourced part
     @FXML

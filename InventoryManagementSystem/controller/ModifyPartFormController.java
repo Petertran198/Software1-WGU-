@@ -11,10 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -50,7 +47,6 @@ public class ModifyPartFormController implements Initializable {
     private String errorListString = new String();
     //Part selected
     private  Part part;
-    private Inventory i = new Inventory();
 
 
     public void switchBackToMainFormScene(ActionEvent event) throws Exception {
@@ -59,6 +55,18 @@ public class ModifyPartFormController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    private void handleCancel(ActionEvent event) throws Exception {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Are you sure?");
+        alert.setContentText("Cancel adding product");
+        Optional<ButtonType> alertBtn = alert.showAndWait();
+        if(alertBtn.get() == ButtonType.OK){
+            switchBackToMainFormScene(event);
+        }
+
     }
 
     //methods when clicked on radio btn  to handle Outsourced part
@@ -169,12 +177,12 @@ public class ModifyPartFormController implements Initializable {
             if(typeOfModifyPartToggleGroup.getSelectedToggle() == inHousePartRadioBtn){
                 machineId= Integer.parseInt(inHouseOrOutField);
                 InHouse inHousePart = new InHouse(parseId, name,parseCost, parseInventory,parseMax,parseMin, machineId);
-                i.updatePart(inHousePart);
+                Inventory.updatePart(inHousePart);
             }else if(typeOfModifyPartToggleGroup.getSelectedToggle() == outSourcedPartRadioBtn){
                 companyName = inHouseOrOutField;
 
                 Outsourced outsourcedPart = new Outsourced(parseId, name,parseCost, parseInventory,parseMax,parseMin,companyName);
-                i.updatePart(outsourcedPart);
+                Inventory.updatePart(outsourcedPart);
             }
             switchBackToMainFormScene(event);
         }

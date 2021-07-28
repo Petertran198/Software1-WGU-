@@ -12,15 +12,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AddProductFormController implements Initializable {
@@ -77,6 +75,7 @@ public class AddProductFormController implements Initializable {
     private Label mainErrorList;
 
     String mainErrorListString = new String();
+
     public void switchBackToMainFormScene(ActionEvent event) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("../view/MainForm.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -169,6 +168,19 @@ public class AddProductFormController implements Initializable {
         }
 
     }
+    
+    @FXML
+    private void handleCancel(ActionEvent event) throws Exception {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Are you sure?");
+        alert.setContentText("Cancel adding product");
+        Optional<ButtonType> alertBtn = alert.showAndWait();
+        if(alertBtn.get() == ButtonType.OK){
+            switchBackToMainFormScene(event);
+        }
+
+    }
+
     public static String handleFormErrorsEmptyField(String name, String inventory, String cost, String max, String min) {
         String errors= "";
 

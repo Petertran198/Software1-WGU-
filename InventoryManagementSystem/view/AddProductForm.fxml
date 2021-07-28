@@ -84,7 +84,7 @@
             <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
          </padding>
       </Button>
-      <Button layoutX="255.0" layoutY="457.0" mnemonicParsing="false" onAction="#switchBackToMainFormScene" prefHeight="80.0" prefWidth="133.0" stylesheets="@../css/main.css" text="Cancel">
+      <Button layoutX="255.0" layoutY="457.0" mnemonicParsing="false" onAction="#handleCancel" prefHeight="80.0" prefWidth="133.0" stylesheets="@../css/main.css" text="Cancel">
          <padding>
             <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
          </padding>
