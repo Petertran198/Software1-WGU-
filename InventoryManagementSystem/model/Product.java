@@ -3,6 +3,8 @@ package InventoryManagementSystem.model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.Optional;
+
 public class Product {
 
     private int id;

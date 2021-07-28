@@ -73,7 +73,10 @@ public class AddProductFormController implements Initializable {
     private TableColumn<Part, Double> linkedPartCostColumn;
     @FXML
     private Label associatedPartErrors;
+    @FXML
+    private Label mainErrorList;
 
+    String mainErrorListString = new String();
     public void switchBackToMainFormScene(ActionEvent event) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("../view/MainForm.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -161,15 +164,99 @@ public class AddProductFormController implements Initializable {
             err += "\n- Please associate at least one part";
         }
         associatedPartErrors.setText(err);
-        if(err.isBlank()){
+        if(associatedPartErrors.getText() == ""){
             linkedParts.remove(selectedPart);
             associatedParts.setItems(linkedParts);
         }
 
     }
+    public static String handleFormErrorsEmptyField(String name, String inventory, String cost, String max, String min) {
+        String errors= "";
+
+        if (name.equals("")) {
+            errors = errors + "- Name field can't be empty. ";
+        }
+        if (inventory.equals("")) {
+            errors = errors + "\n- Inventory field can't be empty. ";
+        }
+        if (cost.equals("")) {
+            errors = errors + "\n- Price/Cost field can't be empty. ";
+        }
+        if (max.equals("")) {
+            errors = errors + "\n- Max field can't be empty. ";
+        }
+        if (min.equals("")) {
+            errors = errors + "\n- Min field can't be empty. ";
+        }
+        return errors;
+    }
+
+    public  String handleFormValidatingDataField(String name, String inventory, String cost, String max, String min, ObservableList partLink) {
+        String errors= "";
+        if(!name.isBlank() && !Inventory.tryParseInt(name).isEmpty()){
+            errors += "\n- Name can't contain numbers";
+        }
+        if(!inventory.isBlank() && Inventory.tryParseInt(inventory).isEmpty()){
+            errors += "\n- Inventory must be a number";
+        }
+        if(!cost.isBlank() && Inventory.tryParseDouble(cost).isEmpty()){
+            errors += "\n- Cost must be a number";
+        }
+        if(!max.isBlank() && Inventory.tryParseDouble(max).isEmpty() ){
+            errors += "\n- Max/Min value must be a number";
+        }
+        if(!min.isBlank() && Inventory.tryParseInt(min).isEmpty()){
+            errors += "\n- Min value must be a number";
+        }
+        try{
+            if(!max.isBlank() && Integer.parseInt(max) < Integer.parseInt(min)){
+                errors += "\n- Max can not be smaller then min";
+            }
+        }catch(Exception e){
+            errors += "\n- Please fix Max/Min field";
+        }
+        if(partLink.size() < 1 ){
+            errors += "\n- Product must have associated Part";
+        }
+
+        return errors;
+    }
+
+    @FXML
+    private void saveProduct(ActionEvent event) throws Exception {
+        String id = productIDField.getText();
+        String name = productNameField.getText();
+        String inventory = productInventoryField.getText();
+        String cost = productCostField.getText();
+        String max = productMaxField.getText();
+        String min = productMinField.getText();
+        mainErrorListString = handleFormErrorsEmptyField(name, inventory , cost, max, min);
+        mainErrorListString += handleFormValidatingDataField(name,inventory,cost,max,min, linkedParts);
+        mainErrorList.setText(mainErrorListString);
+        //If no error
+        if(mainErrorListString.isBlank()){
+            // extracted attributes to make instance of Product
+            id = id.replaceAll("\\D+","");
+            int parseId = Integer.parseInt(id);
+            double parseCost = Double.parseDouble(cost);
+            int parseInventory = Integer.parseInt(inventory);
+            int parseMax = Integer.parseInt(max);
+            int parseMin = Integer.parseInt(min);
+            Product newProductCreated = new Product(parseId, name, parseCost, parseInventory, parseMax, parseMin);
+            //Add all associated part to that product
+            for (Part p : linkedParts) {
+                newProductCreated.addAssociatedPart(p);
+            }
+            Inventory.addProduct(newProductCreated);
+            switchBackToMainFormScene(event);
+        }
+
+    }
+
         @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        int productId = Inventory.incrementPartID();
+        productIDField.setText("Auto Gen: " + productId);
         partIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         partInventoryColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));

@@ -98,40 +98,25 @@ public class AddPartFormController implements Initializable {
         }
         return errors;
     }
-    //Check if what is entered can be turn into int
-    public static Optional<Integer> tryParseInt(String toParse) {
-        try {
-            return Optional.of(Integer.parseInt(toParse));
-        } catch (NumberFormatException e) {
-            return Optional.empty();
-        }
-    }
-    //Check if what is entered can be turn into Double
-    public static Optional<Double> tryParseDouble(String toParse) {
-        try {
-            return Optional.of(Double.parseDouble(toParse));
-        } catch (NumberFormatException e) {
-            return Optional.empty();
-        }
-    }
+
     public  String handleFormValidatingDataField(String name, String inventory, String cost, String max, String min, String typeOfPart) {
         String errors= "";
-        if(!name.isBlank() && !tryParseInt(name).isEmpty()){
+        if(!name.isBlank() && !Inventory.tryParseInt(name).isEmpty()){
             errors += "\n- Name can't contain numbers";
         }
-        if(!inventory.isBlank() && tryParseInt(inventory).isEmpty()){
+        if(!inventory.isBlank() && Inventory.tryParseInt(inventory).isEmpty()){
             errors += "\n- Inventory must be a number";
         }
-        if(!cost.isBlank() && tryParseDouble(cost).isEmpty()){
+        if(!cost.isBlank() && Inventory.tryParseDouble(cost).isEmpty()){
             errors += "\n- Cost must be a number";
         }
-        if(!max.isBlank() && tryParseDouble(max).isEmpty() ){
+        if(!max.isBlank() && Inventory.tryParseDouble(max).isEmpty() ){
             errors += "\n- Max/Min value must be a number";
         }
-        if(!min.isBlank() && tryParseInt(min).isEmpty()){
+        if(!min.isBlank() && Inventory.tryParseInt(min).isEmpty()){
             errors += "\n- Min value must be a number";
         }
-        if((typeOfPartToggleGroup.getSelectedToggle() == inHousePartRadioBtn) &&!typeOfPart.isBlank() && tryParseInt(typeOfPart).isEmpty()){
+        if((typeOfPartToggleGroup.getSelectedToggle() == inHousePartRadioBtn) &&!typeOfPart.isBlank() && Inventory.tryParseInt(typeOfPart).isEmpty()){
             errors += "\n- Machine Id must only be numbers";
         }
         try{

@@ -3,6 +3,8 @@ package InventoryManagementSystem.model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.Optional;
+
 public class Inventory {
     /** An array list of all the Parts */
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
@@ -95,4 +97,20 @@ public class Inventory {
         return ++productID;
     }
 
+    //Check if what is entered can be turn into int
+    public static Optional<Integer> tryParseInt(String toParse) {
+        try {
+            return Optional.of(Integer.parseInt(toParse));
+        } catch (NumberFormatException e) {
+            return Optional.empty();
+        }
+    }
+    //Check if what is entered can be turn into Double
+    public static Optional<Double> tryParseDouble(String toParse) {
+        try {
+            return Optional.of(Double.parseDouble(toParse));
+        } catch (NumberFormatException e) {
+            return Optional.empty();
+        }
+    }
 }

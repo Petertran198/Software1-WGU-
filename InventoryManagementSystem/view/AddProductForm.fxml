@@ -79,7 +79,7 @@
             <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
          </padding>
       </Button>
-      <Button layoutX="16.0" layoutY="457.0" mnemonicParsing="false" prefHeight="84.0" prefWidth="230.0" styleClass="modify-btn" stylesheets="@../css/main.css" text="Save">
+      <Button layoutX="16.0" layoutY="457.0" mnemonicParsing="false" onAction="#saveProduct" prefHeight="84.0" prefWidth="230.0" styleClass="modify-btn" stylesheets="@../css/main.css" text="Save">
          <padding>
             <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
          </padding>
@@ -91,5 +91,6 @@
       </Button>
       <Label fx:id="partErrorField" layoutX="889.0" layoutY="7.0" prefHeight="242.0" prefWidth="208.0" styleClass="text-danger" stylesheets="@../css/main.css" />
       <Label fx:id="associatedPartErrors" layoutX="889.0" layoutY="306.0" prefHeight="172.0" prefWidth="208.0" styleClass="text-danger" stylesheets="@../css/main.css" />
+      <Label fx:id="mainErrorList" layoutX="14.0" layoutY="306.0" prefHeight="150.0" prefWidth="373.0" styleClass="text-danger" stylesheets="@../css/main.css" />
    </children>
 </AnchorPane>
