@@ -67,6 +67,7 @@ public class MainFormController implements Initializable {
     private Scene scene;
     private Parent root;
     public static Part selectedPartToModify;
+    public static Product selectedProductToModify;
 
 
 
@@ -100,10 +101,10 @@ public class MainFormController implements Initializable {
         String err = "";
         Part selected = partsTable.getSelectionModel().getSelectedItem();
         if(selected == null){
-                err += "\n- No Part Selected";
+            err += "\n- No Part Selected";
         }
         if(Inventory.getAllParts().size() == 0){
-             err += "\n- Please Select a Part";
+            err += "\n- Please Select a Part";
         }
         if(err.isEmpty()){
             //Get the part
@@ -112,6 +113,27 @@ public class MainFormController implements Initializable {
             switchToModifyPartScene(event);
         }else {
             partError.setText(err);
+        }
+    }
+
+
+    public void modifyProduct(ActionEvent event) throws Exception {
+        productError.setText("");
+        String err = "";
+        Product selected = productsTable.getSelectionModel().getSelectedItem();
+        if(selected == null){
+            err += "\n- No Products Selected";
+        }
+        if(Inventory.getAllProducts().size() == 0){
+            err += "\n- Please Select a Product";
+        }
+        if(err.isEmpty()){
+            //Get the part
+            Product p = Inventory.lookUpProduct(selected.getId());
+            selectedProductToModify = p;
+            switchToModifyProductScene(event);
+        }else {
+            productError.setText(err);
         }
     }
     /**
@@ -185,7 +207,7 @@ public class MainFormController implements Initializable {
         stage.show();
     }
     public void switchToModifyProductScene(ActionEvent event) throws Exception {
-        root = FXMLLoader.load(getClass().getResource("../view/AddProductForm.fxml"));
+        root = FXMLLoader.load(getClass().getResource("../view/ModifyProductForm.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -243,6 +265,19 @@ public class MainFormController implements Initializable {
         return null;
     }
 
+    /**  Runs when event is activated gets the selected product and delete it if it gets confirmation */
+    @FXML
+    public void handleDeleteForProduct(ActionEvent event) throws IOException {
+        Product product = productsTable.getSelectionModel().getSelectedItem();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Are you sure?");
+        alert.setContentText("Delete the product?");
+        Optional<ButtonType> alertBtn = alert.showAndWait();
+        if(alertBtn.get() == ButtonType.OK){
+            Inventory.deleteProduct(product);
+        }
+    }
+
     /** Method that gets called when the connected fxml file loads */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -258,13 +293,13 @@ public class MainFormController implements Initializable {
         partInventoryColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partCostColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-
-        Product p1 = new Product(1,"bike", 200.00, 5, 1, 5 );
-        Product p2 = new Product(2,"computer1", 300.00, 4, 1, 4 );
-        Product p3 = new Product(3,"laptop", 220.00, 3, 1, 3 );
-        Inventory.addProduct(p1);
-        Inventory.addProduct(p2);
-        Inventory.addProduct(p3);
+//
+//        Product p1 = new Product(1,"bike", 200.00, 5, 1, 5 );
+//        Product p2 = new Product(2,"computer1", 300.00, 4, 1, 4 );
+//        Product p3 = new Product(3,"laptop", 220.00, 3, 1, 3 );
+//        Inventory.addProduct(p1);
+//        Inventory.addProduct(p2);
+//        Inventory.addProduct(p3);
 
         productsTable.setItems(Inventory.getAllProducts());
         productIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));

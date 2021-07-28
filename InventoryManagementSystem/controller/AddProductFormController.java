@@ -159,7 +159,6 @@ public class AddProductFormController implements Initializable {
         if(selectedPart == null){
             err += "\n- Please select a part first";
         }
-
         if(linkedParts.isEmpty() ){
             err += "\n- Please associate at least one part";
         }

@@ -58,14 +58,14 @@
             <Insets top="10.0" />
          </padding>
       </Pane>
-      <Pane layoutX="507.0" layoutY="51.0" prefHeight="452.0" prefWidth="437.0" styleClass="form-border" stylesheets="@../css/main.css">
+      <Pane layoutX="507.0" layoutY="51.0" prefHeight="452.0" prefWidth="452.0" styleClass="form-border" stylesheets="@../css/main.css">
          <children>
             <Label graphicTextGap="5.0" layoutX="11.0" prefHeight="58.0" prefWidth="437.0" text="Products">
                <font>
                   <Font name="Arial Black" size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="productSearchTextField" layoutX="253.0" layoutY="17.0" onAction="#productSearchResultHandler" prefHeight="25.0" prefWidth="164.0" promptText="Search by Product ID or Name">
+            <TextField fx:id="productSearchTextField" layoutX="259.0" layoutY="17.0" onAction="#productSearchResultHandler" prefHeight="25.0" prefWidth="164.0" promptText="Search by Product ID or Name">
                <font>
                   <Font size="11.0" />
                </font></TextField>
@@ -82,17 +82,17 @@
                   <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                </padding>
             </Button>
-            <Button layoutX="245.0" layoutY="397.0" mnemonicParsing="false" onAction="#switchToModifyProductScene" styleClass="modify-btn" stylesheets="@../css/main.css" text="Modify">
+            <Button layoutX="245.0" layoutY="397.0" mnemonicParsing="false" onAction="#modifyProduct" styleClass="modify-btn" stylesheets="@../css/main.css" text="Modify">
                <padding>
                   <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                </padding>
             </Button>
-            <Button layoutX="332.0" layoutY="397.0" mnemonicParsing="false" styleClass="cancel-btn" stylesheets="@../css/main.css" text="Delete">
+            <Button layoutX="332.0" layoutY="397.0" mnemonicParsing="false" onAction="#handleDeleteForProduct" styleClass="cancel-btn" stylesheets="@../css/main.css" text="Delete">
                <padding>
                   <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
                </padding>
             </Button>
-            <Label fx:id="productError" layoutX="119.0" layoutY="21.0" prefHeight="17.0" prefWidth="123.0" styleClass="text-danger" stylesheets="@../CSS/main.css" />
+            <Label fx:id="productError" layoutX="100.0" layoutY="15.0" prefHeight="66.0" prefWidth="158.0" styleClass="text-danger" stylesheets="@../css/main.css" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
