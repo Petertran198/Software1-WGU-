@@ -79,6 +79,9 @@ public class ModifyProductFormController implements Initializable {
     private  Product product;
     private Inventory i = new Inventory();
 
+    /** This method when click will switch to the MainForm.fxml
+     * @param event any ActionEvent most likely click
+     * */
     public void switchBackToMainFormScene(ActionEvent event) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("../view/MainForm.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -86,14 +89,17 @@ public class ModifyProductFormController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-    // Handling Part Search
-    public void partSearchResultHandler(ActionEvent event) {
+
+    /**
+     * This method is in charge of looking for the part
+     * @param event button clicked
+     */    public void partSearchResultHandler(ActionEvent event) {
         partErrorField.setText("");
-        /** Get the text from the search field */
+        // Get the text from the search field
         String searchedForPartText = partsSearchField.getText();
-        /* Look to see if any part was found by Name and return a list of the part found */
+        // Look to see if any part was found by Name and return a list of the part found */
         ObservableList<Part> foundPartsResultList = searchByPartsName(searchedForPartText);
-        /* If part is not found by name search by id */
+        // If part is not found by name search by id
         try {
             int foundPartID = Integer.parseInt(searchedForPartText);
             Part foundPart = searchForPartByID((foundPartID));
@@ -104,7 +110,7 @@ public class ModifyProductFormController implements Initializable {
             System.err.println("------------" + e.getMessage());
 
         }
-        /** If product can not be found write error message */
+        // If product can not be found write error message
         if(foundPartsResultList.size() ==0 ){
             partErrorField.setText("Unable to find part");
         }
@@ -182,6 +188,15 @@ public class ModifyProductFormController implements Initializable {
         }
 
     }
+
+    /**This method make sure that the form does not have any empty fields everything must be populated
+     * @param name name text field input string
+     * @param inventory inventory text field input string
+     * @param cost cost text field input string
+     * @param max  max text field input string
+     * @param min  min text field input string
+     * @return Returns correct error message if any field is blank
+     */
     public static String handleFormErrorsEmptyField(String name, String inventory, String cost, String max, String min) {
         String errors= "";
 
@@ -203,6 +218,16 @@ public class ModifyProductFormController implements Initializable {
         return errors;
     }
 
+    /**
+     *  Handles validating form - verify that everything is the correct data type. Example <b>Name must be string</b>
+     * @param name text of name field
+     * @param inventory text of inventory field
+     * @param cost text of cost field
+     * @param max text of max field
+     * @param min text of min field
+     * @param partLink associated part linked to this specific product
+     * @return string error message if any text fields has any invalid data
+     */
     public  String handleFormValidatingDataField(String name, String inventory, String cost, String max, String min, ObservableList partLink) {
         String errors= "";
         if(!name.isBlank() && !Inventory.tryParseInt(name).isEmpty()){
@@ -254,7 +279,7 @@ public class ModifyProductFormController implements Initializable {
             int parseInventory = Integer.parseInt(inventory);
             int parseMax = Integer.parseInt(max);
             int parseMin = Integer.parseInt(min);
-            Product newProductCreated = new Product(parseId, name, parseCost, parseInventory, parseMax, parseMin);
+            Product newProductCreated = new Product(parseId, name, parseCost, parseInventory, parseMin, parseMax);
             //Add all associated part to that product
             for (Part p : linkedParts) {
                 newProductCreated.addAssociatedPart(p);
@@ -265,6 +290,9 @@ public class ModifyProductFormController implements Initializable {
 
     }
 
+    /**
+     * The initialize method gets called after all @FXML annotated members have been injected/loads. So that the method could populate these @FXML member
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Get the selected products info and populate

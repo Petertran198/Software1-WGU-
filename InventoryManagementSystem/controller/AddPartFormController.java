@@ -51,6 +51,9 @@ public class AddPartFormController implements Initializable {
     private Parent root;
     private String errorListString = new String();
 
+    /** This method when click will return to the MainForm
+     * @param event any ActionEvent most likely click
+     * */
     public void switchBackToMainFormScene(ActionEvent event) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("../view/MainForm.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -83,6 +86,15 @@ public class AddPartFormController implements Initializable {
         inHouseOrOutsourcedPartLabel.setText("Company's Name");
     }
 
+    /**This method make sure that the form does not have any empty fields everything must be populated
+     * @param name name text field input string
+     * @param inventory inventory text field input string
+     * @param cost cost text field input string
+     * @param max  max text field input string
+     * @param min  min text field input string
+     * @param inHouseFieldOrOutsourcedField MachineId/Company's name text field input string
+     * @return Returns correct error message if any field is blank
+     */
     public static String handleFormErrorsEmptyField(String name, String inventory, String cost, String max, String min, String inHouseFieldOrOutsourcedField) {
         String errors= "";
 
@@ -107,6 +119,16 @@ public class AddPartFormController implements Initializable {
         return errors;
     }
 
+    /**
+     *  Handles validating form - verify that everything is the correct data type. Example <b>Name must be string</b>
+     * @param name text of name field
+     * @param inventory text of inventory field
+     * @param cost text of cost field
+     * @param max text of max field
+     * @param min text of min field
+     * @param typeOfPart text of typeOfPart field
+     * @return string error message if any text fields has any invalid data
+     */
     public  String handleFormValidatingDataField(String name, String inventory, String cost, String max, String min, String typeOfPart) {
         String errors= "";
         if(!name.isBlank() && !Inventory.tryParseInt(name).isEmpty()){
@@ -163,12 +185,12 @@ public class AddPartFormController implements Initializable {
             int parseMin = Integer.parseInt(min);
            if(typeOfPartToggleGroup.getSelectedToggle() == inHousePartRadioBtn){
                machineId= Integer.parseInt(inHouseOrOutField);
-               InHouse inHousePart = new InHouse(parseId, name,parseCost, parseInventory,parseMax,parseMin, machineId);
+               InHouse inHousePart = new InHouse(parseId, name,parseCost, parseInventory,parseMin,parseMax, machineId);
                Inventory.addPart(inHousePart);
            }else if(typeOfPartToggleGroup.getSelectedToggle() == outSourcedPartRadioBtn){
                companyName = inHouseOrOutField;
 
-               Outsourced outsourcedPart = new Outsourced(parseId, name,parseCost, parseInventory,parseMax,parseMin,companyName);
+               Outsourced outsourcedPart = new Outsourced(parseId, name,parseCost, parseInventory,parseMin,parseMax,companyName);
                Inventory.addPart(outsourcedPart);
            }
            switchBackToMainFormScene(event);
@@ -176,6 +198,9 @@ public class AddPartFormController implements Initializable {
     }
 
 
+    /**
+     * The initialize method gets called after all @FXML annotated members have been injected/loads. So that the method could populate these @FXML member
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //In Charge of autoGen partId

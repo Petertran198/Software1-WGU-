@@ -49,6 +49,9 @@ public class ModifyPartFormController implements Initializable {
     private  Part part;
 
 
+    /** This method when click will switch to the MainForm.fxml
+     * @param event any ActionEvent most likely click
+     * */
     public void switchBackToMainFormScene(ActionEvent event) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("../view/MainForm.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -56,6 +59,7 @@ public class ModifyPartFormController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
 
     @FXML
     private void handleCancel(ActionEvent event) throws Exception {
@@ -81,6 +85,16 @@ public class ModifyPartFormController implements Initializable {
         inHouseOrOutsourcedPartLabel.setText("Company's Name");
     }
 
+
+    /**This method make sure that the form does not have any empty fields everything must be populated
+     * @param name name text field input string
+     * @param inventory inventory text field input string
+     * @param cost cost text field input string
+     * @param max  max text field input string
+     * @param min  min text field input string
+     * @param inHouseFieldOrOutsourcedField MachineId/Company's name text field input string
+     * @return Returns correct error message if any field is blank
+     */
     public static String handleFormErrorsEmptyField(String name, String inventory, String cost, String max, String min, String inHouseFieldOrOutsourcedField) {
         String errors= "";
 
@@ -104,7 +118,12 @@ public class ModifyPartFormController implements Initializable {
         }
         return errors;
     }
-    //Check if what is entered can be turn into int
+
+    /**
+     * Try to parse a given string
+     * @param toParse string that you want to turn to int
+     * @return either the string converted to an int or returns nothing
+     */
     public static Optional<Integer> tryParseInt(String toParse) {
         try {
             return Optional.of(Integer.parseInt(toParse));
@@ -112,7 +131,12 @@ public class ModifyPartFormController implements Initializable {
             return Optional.empty();
         }
     }
-    //Check if what is entered can be turn into Double
+
+    /**
+     * Try to parse a given string
+     * @param toParse string that you want to turn to double
+     * @return either the string converted to an double or returns nothing
+     */
     public static Optional<Double> tryParseDouble(String toParse) {
         try {
             return Optional.of(Double.parseDouble(toParse));
@@ -120,6 +144,17 @@ public class ModifyPartFormController implements Initializable {
             return Optional.empty();
         }
     }
+
+    /**
+     *  Handles validating form - verify that everything is the correct data type. Example <b>Name must be string</b>
+     * @param name text of name field
+     * @param inventory text of inventory field
+     * @param cost text of cost field
+     * @param max text of max field
+     * @param min text of min field
+     * @param typeOfPart text of typeOfPart field
+     * @return string error message if any text fields has any invalid data
+     */
     public  String handleFormValidatingDataField(String name, String inventory, String cost, String max, String min, String typeOfPart) {
         String errors= "";
         if(!name.isBlank() && !tryParseInt(name).isEmpty()){
@@ -176,18 +211,22 @@ public class ModifyPartFormController implements Initializable {
             int parseMin = Integer.parseInt(min);
             if(typeOfModifyPartToggleGroup.getSelectedToggle() == inHousePartRadioBtn){
                 machineId= Integer.parseInt(inHouseOrOutField);
-                InHouse inHousePart = new InHouse(parseId, name,parseCost, parseInventory,parseMax,parseMin, machineId);
+                InHouse inHousePart = new InHouse(parseId, name,parseCost, parseInventory,parseMin,parseMax, machineId);
                 Inventory.updatePart(inHousePart);
             }else if(typeOfModifyPartToggleGroup.getSelectedToggle() == outSourcedPartRadioBtn){
                 companyName = inHouseOrOutField;
 
-                Outsourced outsourcedPart = new Outsourced(parseId, name,parseCost, parseInventory,parseMax,parseMin,companyName);
+                Outsourced outsourcedPart = new Outsourced(parseId, name,parseCost, parseInventory,parseMin,parseMax,companyName);
                 Inventory.updatePart(outsourcedPart);
             }
             switchBackToMainFormScene(event);
         }
     }
 
+
+    /**
+     * The initialize method gets called after all @FXML annotated members have been injected/loads. So that the method could populate these @FXML member
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         part = MainFormController.selectedPartToModify;

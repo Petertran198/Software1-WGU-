@@ -5,14 +5,18 @@ import javafx.collections.ObservableList;
 
 import java.util.Optional;
 
+/**
+ * In charge of holding all the data of all collective part and product
+ */
 public class Inventory {
-    /** An array list of all the Parts */
+    // An array list of all the Parts
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
-    /** An array list of all the Product */
+    // An array list of all the Product
     private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
-    /** -----------------For Parts ---------------------------------------*/
+    // -----------------For Parts ---------------------------------------
     private static int partID = 0;
+
     /** Returns a list of all the parts*/
     public static ObservableList<Part> getAllParts(){
         return allParts;
@@ -23,16 +27,17 @@ public class Inventory {
         allParts.add(newPart);
     }
 
-    /** Delete a part return T/F depending if deleted */
+    /** Delete a part returns True or False depending if part got deleted */
     public static boolean deletePart(Part selectedPart){
         return allParts.remove(selectedPart);
     }
 
-    //InCharge of incrementing PartID
+    /** In charge of incrementing PartID*/
     public static int incrementPartID() {
        return ++partID;
     }
-    /** Search for Part by Id and return a part if found else returns null */
+
+    /** Search for Part by <strong>Id</strong>> and return a part if found else returns null */
     public static Part lookUpPart(int id) {
         Part returnedPartSearch = null;
         for (Part part : allParts){
@@ -43,7 +48,7 @@ public class Inventory {
         return returnedPartSearch;
     }
 
-
+    /** Search for Part by <strong>String</strong> and return a part if found else returns null */
     public static Part lookUpPart(String name) {
         Part returnedPartSearch = null;
         for (Part part : allParts){
@@ -54,6 +59,10 @@ public class Inventory {
         return returnedPartSearch;
     }
 
+    /**
+     * Find the part by its id and then update the info of that specific part
+     * @param p part you selected
+     */
     public static void updatePart(Part p) {
         for (int i = 0; i < allParts.size(); i++) {
             if (allParts.get(i).getId() == p.getId()) {
@@ -63,7 +72,7 @@ public class Inventory {
         }
     }
 
-    /** -----------------For Product ---------------------------------------*/
+    // -----------------For Product ---------------------------------------
     private static int productID = 0;
 
     /** Returns a list of all the Products*/
@@ -87,6 +96,10 @@ public class Inventory {
         return returnedProductSearch;
     }
 
+    /**
+     * Find the product by its id and then update the info of that specific product
+     * @param p product you selected
+     */
     public static void updateProduct(Product p) {
         for (int i = 0; i < allProducts.size(); i++) {
             if (allProducts.get(i).getId() == p.getId()) {
@@ -101,12 +114,15 @@ public class Inventory {
        return allProducts.remove(selectedProduct);
     }
 
-    //InCharge of incrementing ProductId
+    /**In charge of incrementing ProductId*/
     public static int incrementProductID() {
         return ++productID;
     }
 
-    //Check if what is entered can be turn into int
+    /**Check if what is entered can be turn into an int if it can return the string to int if not return null
+     * @param toParse string that you want to turn into a double
+     * @return double or null
+     * */
     public static Optional<Integer> tryParseInt(String toParse) {
         try {
             return Optional.of(Integer.parseInt(toParse));
@@ -114,7 +130,12 @@ public class Inventory {
             return Optional.empty();
         }
     }
-    //Check if what is entered can be turn into Double
+
+    /**
+     * Check if what is entered can be turn into an double if it can return the string to double if not return null
+     * @param toParse string that you want to turn into a double
+     * @return double or null
+     */
     public static Optional<Double> tryParseDouble(String toParse) {
         try {
             return Optional.of(Double.parseDouble(toParse));

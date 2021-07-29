@@ -18,6 +18,17 @@ public abstract class Part {
     private int stock;
     private int min;
     private int max;
+
+    /**
+     * Part constructor contains all the attributes to make a part:
+     * <strong>Note: Part is an abstract class</strong>
+     * @param id  part id
+     * @param name  part name
+     * @param price  part price
+     * @param stock  part stock
+     * @param min  part min
+     * @param max  part max
+     */
     public Part(int id, String name, double price, int stock, int min, int max) {
         this.id = id;
         this.name = name;
@@ -27,14 +38,15 @@ public abstract class Part {
         this.max = max;
     }
 
-    //return the id
-    public int getId() {
 
+    /**Return part id */
+    public int getId() {
         return id;
     }
 
     /**
-     * @param id the id to set
+     * Give a specific part an id
+     * @param id the id you want to set that part
      */
     public void setId(int id) {
 
@@ -42,6 +54,7 @@ public abstract class Part {
     }
 
     /**
+     * Get the name of part
      * @return the name
      */
     public String getName() {
@@ -50,6 +63,7 @@ public abstract class Part {
     }
 
     /**
+     * Set the name of Part
      * @param name the name to set
      */
     public void setName(String name) {
@@ -57,6 +71,7 @@ public abstract class Part {
     }
 
     /**
+     * Get price of part
      * @return the price
      */
     public double getPrice() {
@@ -64,6 +79,7 @@ public abstract class Part {
     }
 
     /**
+     * Set the price of specific part
      * @param price the price to set
      */
     public void setPrice(double price) {
@@ -71,6 +87,7 @@ public abstract class Part {
     }
 
     /**
+     * Get stock of specific part
      * @return the stock
      */
     public int getStock() {
@@ -78,6 +95,7 @@ public abstract class Part {
     }
 
     /**
+     * Set the inventory of specific part
      * @param stock the stock to set
      */
     public void setStock(int stock) {
@@ -85,6 +103,7 @@ public abstract class Part {
     }
 
     /**
+     * Get the min of part
      * @return the min
      */
     public int getMin() {
@@ -92,6 +111,7 @@ public abstract class Part {
     }
 
     /**
+     * Set the min of specific part
      * @param min the min to set
      */
     public void setMin(int min) {
@@ -99,6 +119,7 @@ public abstract class Part {
     }
 
     /**
+     * Get the max of part
      * @return the max
      */
     public int getMax() {
@@ -106,6 +127,7 @@ public abstract class Part {
     }
 
     /**
+     * Set the max of part
      * @param max the max to set
      */
     public void setMax(int max) {

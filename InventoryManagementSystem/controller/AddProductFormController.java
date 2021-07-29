@@ -76,6 +76,9 @@ public class AddProductFormController implements Initializable {
 
     String mainErrorListString = new String();
 
+    /** This method when click will return to the MainForm
+     * @param event any ActionEvent most likely click
+     * */
     public void switchBackToMainFormScene(ActionEvent event) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("../view/MainForm.fxml"));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -84,14 +87,16 @@ public class AddProductFormController implements Initializable {
         stage.show();
     }
 
-// Handling Part Search
+    /**
+     * Handle Part search by both id and name
+     */
     public void partSearchResultHandler(ActionEvent event) {
         partErrorField.setText("");
-        /** Get the text from the search field */
+        // Get the text from the search field
         String searchedForPartText = partsSearchField.getText();
-        /* Look to see if any part was found by Name and return a list of the part found */
+        // Look to see if any part was found by Name and return a list of the part found
         ObservableList<Part> foundPartsResultList = searchByPartsName(searchedForPartText);
-        /* If part is not found by name search by id */
+        // If part is not found by name search by id
         try {
             int foundPartID = Integer.parseInt(searchedForPartText);
             Part foundPart = searchForPartByID((foundPartID));
@@ -102,7 +107,7 @@ public class AddProductFormController implements Initializable {
             System.err.println("------------" + e.getMessage());
 
         }
-        /** If product can not be found write error message */
+        // If product can not be found write error message
         if(foundPartsResultList.size() ==0 ){
             partErrorField.setText("Unable to find part");
         }
@@ -168,7 +173,7 @@ public class AddProductFormController implements Initializable {
         }
 
     }
-    
+
     @FXML
     private void handleCancel(ActionEvent event) throws Exception {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -181,6 +186,14 @@ public class AddProductFormController implements Initializable {
 
     }
 
+    /**This method make sure that the form does not have any empty fields everything must be populated
+     * @param name name text field input string
+     * @param inventory inventory text field input string
+     * @param cost cost text field input string
+     * @param max  max text field input string
+     * @param min  min text field input string
+     * @return Returns correct error message if any field is blank
+     */
     public static String handleFormErrorsEmptyField(String name, String inventory, String cost, String max, String min) {
         String errors= "";
 
@@ -253,7 +266,7 @@ public class AddProductFormController implements Initializable {
             int parseInventory = Integer.parseInt(inventory);
             int parseMax = Integer.parseInt(max);
             int parseMin = Integer.parseInt(min);
-            Product newProductCreated = new Product(parseId, name, parseCost, parseInventory, parseMax, parseMin);
+            Product newProductCreated = new Product(parseId, name, parseCost, parseInventory, parseMin, parseMax);
             //Add all associated part to that product
             for (Part p : linkedParts) {
                 newProductCreated.addAssociatedPart(p);
@@ -264,7 +277,10 @@ public class AddProductFormController implements Initializable {
 
     }
 
-        @Override
+    /**
+     * The initialize method gets called after all @FXML annotated members have been injected/loads. So that the method could populate these @FXML member
+     */
+    @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         int productId = Inventory.incrementPartID();
         productIDField.setText("Auto Gen: " + productId);

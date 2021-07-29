@@ -17,13 +17,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 
 public class MainFormController implements Initializable {
-    /** ------------- fxid for Part table ------------*/
+    //------------- fxid for Part table ------------
     @FXML
     private TableView<Part> partsTable;
     @FXML
@@ -44,7 +43,7 @@ public class MainFormController implements Initializable {
     private Label partError;
     @FXML
     private Button partDeleteBtn;
-    /** ------------- fxid for Product table ------------*/
+    // ------------- fxid for Product table ------------
     @FXML
     private TableView<Product> productsTable;
 
@@ -67,12 +66,20 @@ public class MainFormController implements Initializable {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    /**
+     * This is the part that is selected from the part table and will be used to populate the modified part form
+     */
     public static Part selectedPartToModify;
+    /**
+     * This is the product that is selected from the part table and will be used to populate the modified product form
+     */
     public static Product selectedProductToModify;
 
 
-
-    //How to exit application will show popup box
+    /**
+     * When clicked  will show popup box asking if you want to exit from application or not
+     * @param event ActionEvent event
+     */
     public void exitApplication(ActionEvent event) throws Exception {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit?");
         alert.showAndWait().ifPresent(response -> {
@@ -81,7 +88,11 @@ public class MainFormController implements Initializable {
                 System.exit(0);            }
         });
     }
-    /** Methods related to parts ------------------------------------- */
+    // Methods related to parts -------------------------------------
+
+    /** This method when click will switch to the AddPartForm.fxml
+     * @param event any ActionEvent most likely click
+     * */
     public void switchToAddPartScene(ActionEvent event) throws Exception {
         root = FXMLLoader.load(getClass().getResource("../view/AddPartForm.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -89,6 +100,10 @@ public class MainFormController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+    /** This method when click will switch to the ModifyPartForm.fxml
+     * @param event any ActionEvent most likely click
+     * */
     public void switchToModifyPartScene(ActionEvent event) throws Exception {
         root = FXMLLoader.load(getClass().getResource("../view/ModifyPartForm.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -97,6 +112,11 @@ public class MainFormController implements Initializable {
         stage.show();
 
     }
+
+    /**
+     * This method  gets the part you want to modified from part table, pass that part data to the modifiedPartForm controller to use, and switch to the modifiedPartForm.fxml view
+     * @param event click event
+     */
     public void modifyPart(ActionEvent event) throws Exception {
         partError.setText("");
         String err = "";
@@ -117,7 +137,10 @@ public class MainFormController implements Initializable {
         }
     }
 
-
+    /**
+     * This method  gets the product you want to modified from product table, pass that part data to the modifiedProductForm controller to use, and switch to the modifiedProductForm.fxml view
+     * @param event click event
+     */
     public void modifyProduct(ActionEvent event) throws Exception {
         productError.setText("");
         String err = "";
@@ -137,6 +160,7 @@ public class MainFormController implements Initializable {
             productError.setText(err);
         }
     }
+
     /**
      * This method is in charge of looking for the product
      * @param event button clicked
@@ -200,7 +224,10 @@ public class MainFormController implements Initializable {
         }
     }
 
-    /** Methods related to products ------------------------------------- */
+    // Methods related to products -------------------------------------
+    /** This method when click will switch to the AddProductForm.fxml
+     * @param event any ActionEvent most likely click
+     * */
     public void switchToAddProductScene(ActionEvent event) throws Exception {
         root = FXMLLoader.load(getClass().getResource("../view/AddProductForm.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -208,6 +235,10 @@ public class MainFormController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+    /** This method when click will switch to the ModifyProductForm.fxml
+     * @param event any ActionEvent most likely click
+     * */
     public void switchToModifyProductScene(ActionEvent event) throws Exception {
         root = FXMLLoader.load(getClass().getResource("../view/ModifyProductForm.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -223,11 +254,11 @@ public class MainFormController implements Initializable {
      */
     public void productSearchResultHandler(ActionEvent event) {
         productError.setText("");
-        /** Get the text from the search field */
+        // Get the text from the search field
         String searchedForProductText = productSearchTextField.getText();
-        /* Look to see if any product was found by Name and return a list of the products found */
+        // Look to see if any product was found by Name and return a list of the products found
         ObservableList<Product> foundProductsResultList = searchByProductsName(searchedForProductText);
-        /* If product is not found by name search by id */
+        // If product is not found by name search by id
         try {
             int foundProductID = Integer.parseInt(searchedForProductText);
             Product foundProduct = searchForProductsByID((foundProductID));
@@ -238,7 +269,7 @@ public class MainFormController implements Initializable {
             System.err.println("Caught Exception can not find" + e.getMessage());
 
         }
-        /** If product can not be found write error message */
+        // If product can not be found write error message
         if(foundProductsResultList.size() ==0 ){
             productError.setText("Unable to find product");
         }
@@ -281,28 +312,17 @@ public class MainFormController implements Initializable {
         }
     }
 
-    /** Method that gets called when the connected fxml file loads */
+    /**
+     * The initialize method gets called after all @FXML annotated members have been injected/loads. So that the method could populate these @FXML member
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        InHouse i1 = new InHouse(1,"pointy screw", 1.00, 100, 1,100, 5);
-//        InHouse i2 = new InHouse(2,"screw1" , 3.00, 100, 1,100,6);
-//        Outsourced i3 = new Outsourced(3,"screw tip", 4.00, 100, 1,100,"boo");
-//        Inventory.addPart(i1);
-//        Inventory.addPart(i2);
-//        Inventory.addPart(i3);
         partsTable.setItems(Inventory.getAllParts());
         partIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         partInventoryColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partCostColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-//
-//        Product p1 = new Product(1,"bike", 200.00, 5, 1, 5 );
-//        Product p2 = new Product(2,"computer1", 300.00, 4, 1, 4 );
-//        Product p3 = new Product(3,"laptop", 220.00, 3, 1, 3 );
-//        Inventory.addProduct(p1);
-//        Inventory.addProduct(p2);
-//        Inventory.addProduct(p3);
 
         productsTable.setItems(Inventory.getAllProducts());
         productIDColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
