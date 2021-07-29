@@ -6,7 +6,11 @@ import javafx.collections.ObservableList;
 import java.util.Optional;
 
 /**
- * In charge of holding all the data of all collective part and product
+ * In charge of holding all the data of all collective part and product<br/>
+ *  <strong>FUTURE ENHANCEMENT:</strong>
+ *  <br/>
+ *  Create another class for materials such as raw components to add onto the inventory management system
+ *
  */
 public class Inventory {
     // An array list of all the Parts
@@ -32,7 +36,9 @@ public class Inventory {
         return allParts.remove(selectedPart);
     }
 
-    /** In charge of incrementing PartID*/
+    /** In charge of incrementing PartID <br/>
+     * <strong>RUNTIME ERROR:</strong>: I had a problem where the partId was not displaying properly. For example when I create my first part the id is still 0. The id did not increment properly. I found out that partId++ will increment after and what I needed was ++partID
+     * */
     public static int incrementPartID() {
        return ++partID;
     }

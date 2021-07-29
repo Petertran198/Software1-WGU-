@@ -1,6 +1,11 @@
 package InventoryManagementSystem.model;
 
-/** This represents a model of a parts that is OutSourced it inherit from Part model*/
+/** This represents a model of a parts that is OutSourced it inherit from Part model
+ *<br/>
+ *  <strong>FUTURE ENHANCEMENT:</strong>
+ * <br/>
+ * Add more attributes relating to what makes an Outsourced Part <br/> Example: manufacturer's number
+ */
 public class Outsourced extends Part{
     private String companyName;
 
@@ -29,6 +34,7 @@ public class Outsourced extends Part{
 
     /**
      * set the companyName of OutSourced part
+     * <strong>RUNTIME ERROR:</strong>: I did not know why I could not set the company's name. At first this method was companyName = companyName. After a little googling I found out you have to use the keyword this for Java to understand that you wanted to set THIS specific attribute.
      */
     public void setCompanyName(String companyName) {
         this.companyName = companyName;

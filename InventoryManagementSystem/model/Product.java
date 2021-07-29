@@ -3,8 +3,12 @@ package InventoryManagementSystem.model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.Optional;
-
+/** This represents a model of a what makes a product
+ *<br/>
+ *  <strong>FUTURE ENHANCEMENT:</strong>
+ *  <br/>
+ *  make it abstract like part and make it that you can only add  Outsourced Product or InHouse Product
+ */
 public class Product {
 
     private int id;
@@ -134,6 +138,7 @@ public class Product {
 
     /**
      * Add an associated part to the Product associatedParts list
+     * <strong>RUNTIME ERROR:</strong>: I had trouble implementing this method because I did not know how to connect a part to a product. I resolved it by creating a private ObservableList of associatedPart and only allowed this method to associate a part with its intended Product
      * @param part part you want to add to product
      */
     public void addAssociatedPart(Part part) {

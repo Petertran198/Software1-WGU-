@@ -18,7 +18,11 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-
+/**
+ * This Controller is in charge of managing all the business logic of Adding a Part
+ * <br/>
+ * <strong>FUTURE ENHANCEMENT:</strong> Make another file for validation and put the validation methods for form data into it and refactor it to check form data dynamically
+ */
 public class AddPartFormController implements Initializable {
     //Label for switching text if inHouse or outSourced
     @FXML
@@ -87,6 +91,8 @@ public class AddPartFormController implements Initializable {
     }
 
     /**This method make sure that the form does not have any empty fields everything must be populated
+     * <br/> <strong>RUNTIME ERROR:</strong> Unable to properly display the error because instead or errors += errors I did
+     * errors = errors. I fixed this by instead of rewriting the error I added on to it by using '+='
      * @param name name text field input string
      * @param inventory inventory text field input string
      * @param cost cost text field input string

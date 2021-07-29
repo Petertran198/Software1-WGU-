@@ -18,6 +18,10 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * This Controller is in charge of managing all the business logic of modifying a part
+ * <br/>
+ * <strong>FUTURE ENHANCEMENT:</strong> Refactor handleFormValidatingDataField and put the selecting toggle button into its own method */
 public class ModifyPartFormController implements Initializable {
     //Label for switching text if inHouse or outSourced
     @FXML
@@ -146,7 +150,8 @@ public class ModifyPartFormController implements Initializable {
     }
 
     /**
-     *  Handles validating form - verify that everything is the correct data type. Example <b>Name must be string</b>
+     *  Handles validating form - verify that everything is the correct data type. Example <b>Name must be string</b><br/>
+     * <strong>RUNTIME ERROR:</strong>: I had trouble validating the 'typeOfPart' form field because it could either be a string if it is OutSourced or an int if it is InHouse. I realized that in the grand scheme it does not matter because machineId is the only one that must be pure numbers to parse as an int. While Company's name can contain a number but it still can be turned into a string to update an instance of Part. I implemented the validation that machineId must be a string by implementing the tryParseInt method on it and if it does not return anything then what was inputted was not a number
      * @param name text of name field
      * @param inventory text of inventory field
      * @param cost text of cost field

@@ -20,7 +20,11 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-
+/**
+ * This Controller is in charge of managing all the business logic of the MainForm aka displaying and populating both Parts and Products
+ * <br/>
+ * <strong>FUTURE ENHANCEMENT:</strong> Make another file for switching scenes. This is because we have this method in multiple files and it is the perfect candidate for refactoring
+ */
 public class MainFormController implements Initializable {
     //------------- fxid for Part table ------------
     @FXML
@@ -41,8 +45,7 @@ public class MainFormController implements Initializable {
     private TextField partSearchTextField;
     @FXML
     private Label partError;
-    @FXML
-    private Button partDeleteBtn;
+
     // ------------- fxid for Product table ------------
     @FXML
     private TableView<Product> productsTable;
@@ -114,7 +117,8 @@ public class MainFormController implements Initializable {
     }
 
     /**
-     * This method  gets the part you want to modified from part table, pass that part data to the modifiedPartForm controller to use, and switch to the modifiedPartForm.fxml view
+     * This method  gets the part you want to modified from part table, pass that part data to the modifiedPartForm controller to use, and switch to the modifiedPartForm.fxml view <br/>
+     * <strong>RUNTIME ERROR:</strong> I did not know why the part data did not transfer from the MainForm to ModifyPartForm. I figured I need to somehow pass this data into the ModifyPartForm. I did this by making a public static property for MainFormController called 'selectedPartToModify' which is a Part and transfer the selected part data into 'selectedPartToModify' which all it to be used in the modifyPartForm controller
      * @param event click event
      */
     public void modifyPart(ActionEvent event) throws Exception {

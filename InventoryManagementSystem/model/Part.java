@@ -5,9 +5,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 
 
-/**
- *
- * @author Doan Tran
+/** This represents a model of what makes a part.It is abstract <br/>
+ *  <strong>FUTURE ENHANCEMENT:</strong> <br/>Add more attributes relating to what makes up a part that can work for both InHouse and Outsourced parts
+ *  <br/> Example SKU, Color, Material, etc
  */
 public abstract class Part {
 

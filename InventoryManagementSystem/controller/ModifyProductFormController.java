@@ -21,6 +21,10 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * This Controller is in charge of managing all the business logic of modifying a Product
+ * <br/>
+ * <strong>FUTURE ENHANCEMENT:</strong>  Allow the user to search for product by inventory level as well */
 public class ModifyProductFormController implements Initializable {
     //Get the FXML ID for product textfield
     @FXML
@@ -183,8 +187,15 @@ public class ModifyProductFormController implements Initializable {
         }
         associatedPartErrors.setText(err);
         if(associatedPartErrors.getText() == ""){
-            linkedParts.remove(selectedPart);
-            associatedParts.setItems(linkedParts);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Are you sure?");
+            alert.setContentText("Cancel adding product");
+            Optional<ButtonType> alertBtn = alert.showAndWait();
+            if(alertBtn.get() == ButtonType.OK){
+                linkedParts.remove(selectedPart);
+                associatedParts.setItems(linkedParts);
+            }
+
         }
 
     }
@@ -292,6 +303,7 @@ public class ModifyProductFormController implements Initializable {
 
     /**
      * The initialize method gets called after all @FXML annotated members have been injected/loads. So that the method could populate these @FXML member
+     * I had trouble understanding how I can transfer the product selected from the MainForm into this ModifyProductForm to be edited. I realized that I could used the public static property of MainFormController called 'selectedProductToModify' this attribute contains the product I want to modify thus I set all the property of this product to its corresponding text field.
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

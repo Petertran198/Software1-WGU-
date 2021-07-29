@@ -21,6 +21,11 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * This Controller is in charge of managing all the business logic of Adding a Product
+ * <br/>
+ * <strong>FUTURE ENHANCEMENT:</strong> Refactor saveProduct method and seperate it into smaller methods. Example 1 for getting all text from form field
+ */
 public class AddProductFormController implements Initializable {
     //Get the FXML ID for product textfield
     @FXML
@@ -89,6 +94,8 @@ public class AddProductFormController implements Initializable {
 
     /**
      * Handle Part search by both id and name
+     * <br/> <strong>RUNTIME ERROR:</strong> Do not know why the errors would not go away after a correct id or name was entered
+     * I realized that the string persisted and I had to clear it. That is why I put partErrorField.setText(")
      */
     public void partSearchResultHandler(ActionEvent event) {
         partErrorField.setText("");
@@ -168,8 +175,14 @@ public class AddProductFormController implements Initializable {
         }
         associatedPartErrors.setText(err);
         if(associatedPartErrors.getText() == ""){
-            linkedParts.remove(selectedPart);
-            associatedParts.setItems(linkedParts);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Are you sure?");
+            alert.setContentText("Cancel adding product");
+            Optional<ButtonType> alertBtn = alert.showAndWait();
+            if(alertBtn.get() == ButtonType.OK){
+                linkedParts.remove(selectedPart);
+                associatedParts.setItems(linkedParts);
+            }
         }
 
     }
