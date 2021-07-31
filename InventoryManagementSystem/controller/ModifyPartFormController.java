@@ -168,6 +168,9 @@ public class ModifyPartFormController implements Initializable {
         if(!inventory.isBlank() && tryParseInt(inventory).isEmpty()){
             errors += "\n- Inventory must be a number";
         }
+        if( Integer.parseInt(inventory) >  Integer.parseInt(max) ||  Integer.parseInt(inventory) <  Integer.parseInt(min)){
+            errors += "\n- Inventory must be between Max and Min";
+        }
         if(!cost.isBlank() && tryParseDouble(cost).isEmpty()){
             errors += "\n- Cost must be a number";
         }

@@ -137,11 +137,15 @@ public class AddPartFormController implements Initializable {
      */
     public  String handleFormValidatingDataField(String name, String inventory, String cost, String max, String min, String typeOfPart) {
         String errors= "";
+
         if(!name.isBlank() && !Inventory.tryParseInt(name).isEmpty()){
             errors += "\n- Name can't contain numbers";
         }
         if(!inventory.isBlank() && Inventory.tryParseInt(inventory).isEmpty()){
             errors += "\n- Inventory must be a number";
+        }
+        if( Integer.parseInt(inventory) >  Integer.parseInt(max) ||  Integer.parseInt(inventory) <  Integer.parseInt(min)){
+            errors += "\n- Inventory must be between Max and Min";
         }
         if(!cost.isBlank() && Inventory.tryParseDouble(cost).isEmpty()){
             errors += "\n- Cost must be a number";
