@@ -306,13 +306,21 @@ public class MainFormController implements Initializable {
     /**  Runs when event is activated gets the selected product and delete it if it gets confirmation */
     @FXML
     public void handleDeleteForProduct(ActionEvent event) throws IOException {
+        productError.setText("");
         Product product = productsTable.getSelectionModel().getSelectedItem();
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Are you sure?");
         alert.setContentText("Delete the product?");
         Optional<ButtonType> alertBtn = alert.showAndWait();
         if(alertBtn.get() == ButtonType.OK){
-            Inventory.deleteProduct(product);
+            ObservableList<Part> partsOfProduct = product.getAllAssociatedParts();
+            if (partsOfProduct.size() >= 1) {
+                String err = new String(" Can't delete product ");
+                err += "\n that has a part associated with it.";
+                productError.setText(err);
+            } else {
+                Inventory.deleteProduct(product);
+            }
         }
     }
 

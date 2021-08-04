@@ -255,10 +255,6 @@ public class AddProductFormController implements Initializable {
         }catch(Exception e){
             errors += "\n- Please fix Max/Min field";
         }
-        if(partLink.size() < 1 ){
-            errors += "\n- Product must have associated Part";
-        }
-
         return errors;
     }
 
